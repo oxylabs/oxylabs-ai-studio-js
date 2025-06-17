@@ -1,0 +1,62 @@
+{
+  "name": "oxylabs-ai-studio",
+  "version": "1.0.5",
+  "description": "JavaScript SDK for Oxylabs AI Studio API services",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "examples/"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oxylabs/oxylabs-ai-studio-js.git"
+  },
+  "homepage": "https://github.com/oxylabs/oxylabs-ai-studio-js#readme",
+  "bugs": {
+    "url": "https://github.com/oxylabs/oxylabs-ai-studio-js/issues"
+  },
+  "keywords": [
+    "oxylabs",
+    "ai-studio",
+    "ai",
+    "studio",
+    "api",
+    "sdk",
+    "scraping",
+    "ai-scrape",
+    "ai-crawl",
+    "ai-browser-agent",
+    "crawl",
+    "scrape",
+    "browser"
+  ],
+  "author": "Oxylabs",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.57.1",
+    "globals": "^16.2.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.0",
+    "typescript": "^5.8.3"
+  }
+}
