@@ -24,7 +24,7 @@ export class OxylabsAIStudioClient {
       timeout: this.config.timeout,
       headers: {
         'Content-Type': 'application/json',
-        'User-Agent': 'Oxylabs-JS-SDK/1.0.0'
+        'User-Agent': 'sdk'
       }
     });
 

@@ -22,7 +22,7 @@ export class AiCrawlService {
    * Generate schema for crawling (POST /crawl/schema)
    */
   async generateSchema(options: GenerateSchemaOptions): Promise<SchemaResponse> {
-    return await this.client.post<SchemaResponse>('/crawl/schema', options);
+    return await this.client.post<SchemaResponse>('/extract/schema', options);
   }
 
   /**
