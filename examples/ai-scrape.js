@@ -42,7 +42,6 @@ async function testScrapeOutputJson() {
     
     const options = {
       url: 'https://www.freelancer.com',
-      user_prompt: 'Extract all links',
       output_format: OutputFormat.JSON,
       openapi_schema: {
         type: 'object',

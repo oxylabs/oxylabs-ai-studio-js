@@ -32,7 +32,7 @@ export class AiCrawlService {
     const payload: any = {
       domain: options.url, // Note: API expects 'domain' but we use 'url' for consistency
       output_format: options.output_format || "markdown",
-      auxiliary_prompt: options.user_prompt,
+      auxiliary_prompt: options.crawl_prompt,
       render_html: options.render_html || false,
       return_sources_limit: options.max_pages || 25
     };
@@ -112,17 +112,17 @@ export class AiCrawlService {
   async crawlWithAutoSchema(options: CrawlWithAutoSchemaOptions, timeout = 60000): Promise<any> {
     // Generate schema first
     const schemaResult = await this.generateSchema({
-      user_prompt: options.user_prompt
+      user_prompt: options.parse_prompt
     });
 
     // Then perform synchronous crawling
     return await this.crawl({
       url: options.url,
-      user_prompt: options.user_prompt || "",
+      crawl_prompt: options.crawl_prompt || "",
       output_format: options.output_format || "markdown",
       openapi_schema: schemaResult.openapi_schema,
       max_pages: options.max_pages,
       render_html: options.render_html || false
     }, timeout);
   }
-} 
+}

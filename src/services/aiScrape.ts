@@ -33,7 +33,6 @@ export class AiScrapeService {
     console.log('Submitting scrape request with options:', options);
     const payload: any = {
       url: options.url,
-      user_prompt: options.user_prompt || "",
       output_format: options.output_format || "markdown",
       render_html: options.render_html || false
     };
@@ -119,7 +118,7 @@ export class AiScrapeService {
     // Then perform synchronous scraping
     return await this.scrape({
       url: options.url,
-      user_prompt: options.user_prompt || "",
+      user_prompt: "",
       output_format: options.output_format || "markdown",
       openapi_schema: schemaResult.openapi_schema,
       render_html: options.render_html || false

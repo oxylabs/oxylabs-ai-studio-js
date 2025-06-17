@@ -32,7 +32,7 @@ export class AiBrowseService {
     const payload: any = {
       url: options.url,
       output_format: options.output_format || "markdown",
-      auxiliary_prompt: options.user_prompt
+      auxiliary_prompt: options.browse_prompt
     };
 
     // Only include openapi_schema if output_format is json
@@ -110,13 +110,13 @@ export class AiBrowseService {
   async browseWithAutoSchema(options: BrowseWithAutoSchemaOptions, timeout = 60000): Promise<any> {
     // Generate schema first
     const schemaResult = await this.generateSchema({
-      user_prompt: options.user_prompt
+      user_prompt: options.parse_prompt
     });
 
     // Then perform synchronous browsing
     return await this.browse({
       url: options.url,
-      user_prompt: options.user_prompt || "",
+      browse_prompt: options.browse_prompt || "",
       output_format: options.output_format || "markdown",
       openapi_schema: schemaResult.openapi_schema,
       render_html: options.render_html || false

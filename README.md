@@ -28,7 +28,12 @@ import {
   OxylabsAIStudioSDK
 } from 'oxylabs-ai-studio';
 
-const sdk = new OxylabsAIStudioSDK();
+const sdk = new OxylabsAIStudioSDK({
+  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
+  apiKey: 'your_api_key_here',
+  timeout: 120000,
+  retryAttempts: 3,
+});
 
 async function testGenerateSchema() {
   try {
@@ -53,10 +58,12 @@ import {
   OutputFormat
 } from 'oxylabs-ai-studio';
 
-const sdk = new OxylabsAIStudioSDK();
-const timeout = 120000;
-
-
+const sdk = new OxylabsAIStudioSDK({
+  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
+  apiKey: 'your_api_key_here',
+  timeout: 120000,
+  retryAttempts: 3,
+});
 
 async function testScrapeOutputJson() {
   try {
@@ -74,7 +81,7 @@ async function testScrapeOutputJson() {
       }
     };
     
-    const results = await sdk.aiScrape.scrape(options, timeout);
+    const results = await sdk.aiScrape.scrape(options);
     console.log('Sync scraping results:', results);
   } catch (error) {
     console.error('Sync scraping error:', error.message);
@@ -83,6 +90,14 @@ async function testScrapeOutputJson() {
 
 testScrapeOutputJson();
 ```
+
+### Available Parameters
+These parameters are available across all services (AI-Scrape, AI-Crawl, AI-Browser-Agent):
+- `url` (*string*): The target URL to process
+- `user_prompt` (*string*): Instructions for what data to extract. Required when generating schema.
+- `output_format` (*string*): Output format, can be either 'markdown' or 'json'
+- `render_html` (*boolean*): Whether to render HTML content
+- *`openapi_schema` (*Record<string, any>*): JSON Schema defining the structure of the output data. Required when *output_format* is `json`
 
 ## AI-Crawl
 
@@ -94,7 +109,12 @@ import {
   OutputFormat
 } from 'oxylabs-ai-studio';
 
-const sdk = new OxylabsAIStudioSDK();
+const sdk = new OxylabsAIStudioSDK({
+  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
+  apiKey: 'your_api_key_here',
+  timeout: 120000,
+  retryAttempts: 3,
+});
 
 async function testCrawlOutputJson() {
   try {
@@ -133,6 +153,15 @@ async function testCrawlOutputJson() {
 testCrawlOutputJson();
 ```
 
+### Available Parameters
+These parameters are available across all services (AI-Scrape, AI-Crawl, AI-Browser-Agent):
+- `url` (*string*): The target URL to process
+- `crawl_prompt` (*string*): Instructions definining what pages to find
+- `parse_prompt` (*string*): Instructions for what data to extract. Required when generating schema.
+- `output_format` (*string*): Output format, can be either 'markdown', 'json'
+- `max_pages` (*int*): Maximum number of pages/sources to return.
+- `render_html` (*boolean*): Whether to render HTML content
+- *`openapi_schema` (*Record<string, any>*): JSON Schema defining the structure of the output data. Required when *output_format* is `json`
 
 ## AI-Browser-Agent
 
@@ -144,8 +173,12 @@ import {
   OutputFormat
 } from 'oxylabs-ai-studio';
 
-const sdk = new OxylabsAIStudioSDK();
-const timeout = 120000;
+const sdk = new OxylabsAIStudioSDK({
+  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
+  apiKey: 'your_api_key_here',
+  timeout: 120000,
+  retryAttempts: 3,
+});
 
 async function testBrowseOutputJson() {
   try {
@@ -163,7 +196,7 @@ async function testBrowseOutputJson() {
       }
     };
     
-    const results = await sdk.aiBrowse.browse(options, timeout);
+    const results = await sdk.aiBrowse.browse(options);
     console.log('Sync browsing results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Sync browsing error:', error.message);
@@ -172,6 +205,15 @@ async function testBrowseOutputJson() {
 
 testBrowseOutputJson();
 ```
+
+### Available Parameters
+These parameters are available across all services (AI-Scrape, AI-Crawl, AI-Browser-Agent):
+- `url` (*string*): The target URL to process
+- `browse_prompt` (*string*): Instructions definining what actions browser should do.
+- `parse_prompt` (*string*): Instructions for what data to extract. Required when generating schema.
+- `output_format` (*string*): Output format, can be either 'markdown', 'html', 'json', 'screenshot'
+- `render_html` (*boolean*): Whether to render HTML content
+- *`openapi_schema` (*Record<string, any>*): JSON Schema defining the structure of the output data. Required when *output_format* is `json`
 
 ## Running Examples
 

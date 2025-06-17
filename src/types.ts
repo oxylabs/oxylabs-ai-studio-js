@@ -71,7 +71,7 @@ export interface ScrapeWithAutoSchemaOptions {
 // AI Crawl interfaces
 export interface CrawlOptions {
   url: string;
-  user_prompt?: string;
+  crawl_prompt: string;
   output_format?: OutputFormat | string;
   openapi_schema?: Record<string, any>;
   max_pages?: number;
@@ -80,8 +80,9 @@ export interface CrawlOptions {
 
 export interface CrawlWithAutoSchemaOptions {
   url: string;
-  user_prompt: string;
-  output_format?: OutputFormat | string;
+  crawl_prompt: string;
+  parse_prompt: string;
+  output_format: OutputFormat | string;
   max_pages?: number;
   render_html?: boolean;
 }
@@ -89,15 +90,16 @@ export interface CrawlWithAutoSchemaOptions {
 // AI Browse interfaces
 export interface BrowseOptions {
   url: string;
-  user_prompt?: string;
-  output_format?: OutputFormat | string;
-  openapi_schema?: Record<string, any>;
+  browse_prompt: string;
+  output_format: OutputFormat | string;
+  openapi_schema: Record<string, any>;
   render_html?: boolean;
 }
 
 export interface BrowseWithAutoSchemaOptions {
   url: string;
-  user_prompt: string;
+  browse_prompt: string;
+  parse_prompt: string;
   output_format?: OutputFormat | string;
   render_html?: boolean;
 }
