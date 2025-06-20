@@ -92,12 +92,11 @@ testScrapeOutputJson();
 ```
 
 ### Available Parameters
-These parameters are available across all services (AI-Scrape, AI-Crawl, AI-Browser-Agent):
-- `url` (*string*): The target URL to process
-- `user_prompt` (*string*): Instructions for what data to extract. Required when generating schema.
-- `output_format` (*string*): Output format, can be either 'markdown' or 'json'
-- `render_html` (*boolean*): Whether to render HTML content
-- *`openapi_schema` (*Record<string, any>*): JSON Schema defining the structure of the output data. Required when *output_format* is `json`
+- `url` (*string*): The target URL to process.
+- `user_prompt` (*string*): Instructions for what data to extract. This is used to automatically generate the `openapi_schema` when using the `scrapeWithAutoSchema` method.
+- `output_format` (*string*): The desired format for the output. Can be either `markdown` or `json`. Defaults to `markdown`.
+- `render_html` (*boolean*): Specifies whether to render JavaScript on the page before extraction. Defaults to `false`.
+- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
 
 ## AI-Crawl
 
@@ -154,14 +153,13 @@ testCrawlOutputJson();
 ```
 
 ### Available Parameters
-These parameters are available across all services (AI-Scrape, AI-Crawl, AI-Browser-Agent):
-- `url` (*string*): The target URL to process
-- `crawl_prompt` (*string*): Instructions definining what pages to find
-- `parse_prompt` (*string*): Instructions for what data to extract. Required when generating schema.
-- `output_format` (*string*): Output format, can be either 'markdown', 'json'
-- `max_pages` (*int*): Maximum number of pages/sources to return.
-- `render_html` (*boolean*): Whether to render HTML content
-- *`openapi_schema` (*Record<string, any>*): JSON Schema defining the structure of the output data. Required when *output_format* is `json`
+- `url` (*string*): The starting URL for the crawl.
+- `crawl_prompt` (*string*): Instructions defining the types of pages to find and crawl.
+- `parse_prompt` (*string*): Instructions for what data to extract from the crawled pages. This is used to automatically generate the `openapi_schema` when using the `crawlWithAutoSchema` method.
+- `output_format` (*string*): The desired format for the output. Can be either `markdown` or `json`. Defaults to `markdown`.
+- `max_pages` (*integer*): The maximum number of pages or sources to return. Defaults to `25`.
+- `render_html` (*boolean*): Specifies whether to render JavaScript on the pages before extraction. Defaults to `false`.
+- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
 
 ## AI-Browser-Agent
 
@@ -207,13 +205,55 @@ testBrowseOutputJson();
 ```
 
 ### Available Parameters
-These parameters are available across all services (AI-Scrape, AI-Crawl, AI-Browser-Agent):
-- `url` (*string*): The target URL to process
-- `browse_prompt` (*string*): Instructions definining what actions browser should do.
-- `parse_prompt` (*string*): Instructions for what data to extract. Required when generating schema.
-- `output_format` (*string*): Output format, can be either 'markdown', 'html', 'json', 'screenshot'
-- `render_html` (*boolean*): Whether to render HTML content
-- *`openapi_schema` (*Record<string, any>*): JSON Schema defining the structure of the output data. Required when *output_format* is `json`
+- `url` (*string*): The target URL for the browser agent to start at.
+- `browse_prompt` (*string*): Instructions defining the actions the browser agent should perform.
+- `parse_prompt` (*string*): Instructions for what data to extract after performing the browser actions. This is used to automatically generate the `openapi_schema` when using the `browseWithAutoSchema` method.
+- `output_format` (*string*): The desired format for the output. Can be `markdown`, `html`, `json`, or `screenshot`. Defaults to `markdown`.
+- `render_html` (*boolean*): Specifies whether to render JavaScript on the page. Although this is a browser agent, this flag might influence certain behaviors. Defaults to `false`.
+- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
+
+## AI-Search
+
+### Basic usage
+
+```javascript
+import {
+  OxylabsAIStudioSDK,
+} from 'oxylabs-ai-studio';
+
+const sdk = new OxylabsAIStudioSDK({
+  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
+  apiKey: 'your_api_key_here',
+  timeout: 120000,
+  retryAttempts: 3,
+});
+
+async function testSearch() {
+  try {
+    console.log('Testing search...');
+
+    const options = {
+      query: 'weather in London',
+      limit: 3,
+      return_content: true,
+      render_javascript: false,
+    };
+
+    const results = await sdk.aiSearch.search(options);
+    console.log('Search results:', JSON.stringify(results, null, 2));
+  } catch (error) {
+    console.error('Search error:', error.message);
+  }
+}
+
+testSearch();
+```
+
+### Available Parameters
+- `query` (*string*): The search query.
+- `limit` (*integer*): The maximum number of search results to return. Maximum: 50.
+- `render_javascript` (*boolean*): Whether to render JavaScript on the page. Defaults to `false`.
+- `return_content` (*boolean*): Whether to return the markdown content of each of the search result. Defaults to `true`.
 
 ## Running Examples
 
@@ -221,11 +261,12 @@ After installing the package, you can run the JavaScript examples directly:
 
 ```bash
 # Set up your environment variables
-export OXYLABS_AI_STUDIO_API_URL=https://api.oxylabs.io
+export OXYLABS_AI_STUDIO_API_URL=https://api-aistudio.oxylabs.io/v1
 export OXYLABS_AI_STUDIO_API_KEY=your_api_key_here
 
 # Run examples
 node node_modules/oxylabs-ai-studio/examples/ai-scrape.js
 node node_modules/oxylabs-ai-studio/examples/ai-crawl.js
 node node_modules/oxylabs-ai-studio/examples/ai-browse.js
+node node_modules/oxylabs-ai-studio/examples/ai-search.js
 ```

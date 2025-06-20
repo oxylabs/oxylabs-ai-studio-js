@@ -110,3 +110,30 @@ export interface HttpRequestConfig {
   timeout?: number;
   [key: string]: any;
 } 
+
+// AI Search interfaces
+export interface SearchOptions {
+  query: string;
+  limit?: number;
+  render_javascript?: boolean;
+  return_content?: boolean;
+}
+
+export interface SearchResult {
+  url: string;
+  title: string;
+  description: string;
+  content?: string | null;
+}
+
+export interface SearchRunDataResponse {
+  status: 'processing' | 'completed' | 'failed';
+  message?: string | null;
+  data?: SearchResult[] | null;
+}
+
+export interface AiSearchRun {
+  run_id: string;
+  message: string | null;
+  data: SearchResult[] | null;
+}

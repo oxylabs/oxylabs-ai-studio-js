@@ -3,6 +3,7 @@ import { OxylabsAIStudioClient } from './client.js';
 import { AiBrowseService } from './services/aiBrowse.js';
 import { AiCrawlService } from './services/aiCrawl.js';
 import { AiScrapeService } from './services/aiScrape.js';
+import { AiSearchService } from './services/aiSearch.js';
 import { SDKConfig } from './types.js';
 import { MissingApiKeyError, MissingApiUrlError } from './errors.js';
 
@@ -18,7 +19,7 @@ export class OxylabsAIStudioSDK {
   public readonly aiScrape: AiScrapeService;
   public readonly aiCrawl: AiCrawlService;
   public readonly aiBrowse: AiBrowseService;
-
+  public readonly aiSearch: AiSearchService;
   constructor(config: SDKConfig = {}) {
     const apiUrl = config.apiUrl || process.env.OXYLABS_AI_STUDIO_API_URL || '';
     const apiKey = config.apiKey || process.env.OXYLABS_AI_STUDIO_API_KEY || '';
@@ -47,6 +48,7 @@ export class OxylabsAIStudioSDK {
     this.aiScrape = new AiScrapeService(this.client);
     this.aiCrawl = new AiCrawlService(this.client);
     this.aiBrowse = new AiBrowseService(this.client);
+    this.aiSearch = new AiSearchService(this.client);
   }
 
   /**
