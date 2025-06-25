@@ -22,7 +22,7 @@ export class AiBrowseService {
    * Generate schema for browsing (POST /browse/schema)
    */
   async generateSchema(options: GenerateSchemaOptions): Promise<SchemaResponse> {
-    return await this.client.post<SchemaResponse>('/browser-agent/schema', options);
+    return await this.client.post<SchemaResponse>('/browser-agent/generate-params', options);
   }
 
   /**
