@@ -10,7 +10,7 @@ export class OxylabsAIStudioClient {
 
   constructor(config: SDKConfig) {
     this.config = {
-      apiUrl: config.apiUrl || '',
+      apiUrl: config.apiUrl || 'https://api-aistudio.oxylabs.io/v1',
       apiKey: config.apiKey || '',
       timeout: config.timeout || 30000,
       retryAttempts: config.retryAttempts || 3,
