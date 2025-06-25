@@ -15,7 +15,6 @@ npm install oxylabs-ai-studio
 Either add `OXYLABS_AI_STUDIO_API_URL` and `OXYLABS_AI_STUDIO_API_KEY` values to the `.env` file, or as your environment variables:
 
 ```bash
-export OXYLABS_AI_STUDIO_API_URL=https://api-aistudio.oxylabs.io/v1
 export OXYLABS_AI_STUDIO_API_KEY=your_api_key_here
 ```
 
@@ -29,7 +28,6 @@ import {
 } from 'oxylabs-ai-studio';
 
 const sdk = new OxylabsAIStudioSDK({
-  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
   apiKey: 'your_api_key_here',
   timeout: 120000,
   retryAttempts: 3,
@@ -59,7 +57,6 @@ import {
 } from 'oxylabs-ai-studio';
 
 const sdk = new OxylabsAIStudioSDK({
-  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
   apiKey: 'your_api_key_here',
   timeout: 120000,
   retryAttempts: 3,
@@ -109,7 +106,6 @@ import {
 } from 'oxylabs-ai-studio';
 
 const sdk = new OxylabsAIStudioSDK({
-  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
   apiKey: 'your_api_key_here',
   timeout: 120000,
   retryAttempts: 3,
@@ -172,7 +168,6 @@ import {
 } from 'oxylabs-ai-studio';
 
 const sdk = new OxylabsAIStudioSDK({
-  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
   apiKey: 'your_api_key_here',
   timeout: 120000,
   retryAttempts: 3,
@@ -222,7 +217,6 @@ import {
 } from 'oxylabs-ai-studio';
 
 const sdk = new OxylabsAIStudioSDK({
-  apiUrl: 'https://api-aistudio.oxylabs.io/v1',
   apiKey: 'your_api_key_here',
   timeout: 120000,
   retryAttempts: 3,
@@ -257,16 +251,10 @@ testSearch();
 
 ## Running Examples
 
-After installing the package, you can run the JavaScript examples directly:
+You can find more examples of each application here:
 
-```bash
-# Set up your environment variables
-export OXYLABS_AI_STUDIO_API_URL=https://api-aistudio.oxylabs.io/v1
-export OXYLABS_AI_STUDIO_API_KEY=your_api_key_here
-
-# Run examples
-node node_modules/oxylabs-ai-studio/examples/ai-scrape.js
-node node_modules/oxylabs-ai-studio/examples/ai-crawl.js
-node node_modules/oxylabs-ai-studio/examples/ai-browse.js
-node node_modules/oxylabs-ai-studio/examples/ai-search.js
+https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-browse.js
+https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-crawl.js
+https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-scrape.js
+https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-search.js
 ```
