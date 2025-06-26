@@ -93,7 +93,6 @@ export interface BrowseOptions {
   browse_prompt: string;
   output_format: OutputFormat | string;
   openapi_schema: Record<string, any>;
-  render_html?: boolean;
 }
 
 export interface BrowseWithAutoSchemaOptions {

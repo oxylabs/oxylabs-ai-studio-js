@@ -119,7 +119,6 @@ export class AiBrowseService {
       browse_prompt: options.browse_prompt || "",
       output_format: options.output_format || "markdown",
       openapi_schema: schemaResult.openapi_schema,
-      render_html: options.render_html || false
     }, timeout);
   }
 }

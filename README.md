@@ -253,8 +253,7 @@ testSearch();
 
 You can find more examples of each application here:
 
-https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-browse.js
-https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-crawl.js
-https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-scrape.js
-https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-search.js
-```
+- [AI-Browse Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-browse.js)
+- [AI-Crawl Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-crawl.js)
+- [AI-Scrape Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-scrape.js)
+- [AI-Search Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-search.js)
