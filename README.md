@@ -1,6 +1,6 @@
 # Oxylabs AI Studio JavaScript SDK
 
-A JavaScript SDK for seamlessly interacting with Oxylabs AI Studio API services, including AI-Scrape, AI-Crawl, AI-Browser-Agent and other data extraction tools.
+A JavaScript SDK for seamlessly interacting with Oxylabs AI Studio API services, including AI-Scraper, AI-Crawler, AI-Browser-Agent and other data extraction tools.
 
 ## Installation
 
@@ -18,7 +18,7 @@ Either add `OXYLABS_AI_STUDIO_API_URL` and `OXYLABS_AI_STUDIO_API_KEY` values to
 export OXYLABS_AI_STUDIO_API_KEY=your_api_key_here
 ```
 
-## AI-Scrape
+## AI-Scraper
 
 ### Generate Schema
 
@@ -36,7 +36,7 @@ const sdk = new OxylabsAIStudioSDK({
 async function testGenerateSchema() {
   try {
     console.log('Testing schema generation...');
-    const schema = await sdk.aiScrape.generateSchema({
+    const schema = await sdk.aiScraper.generateSchema({
       user_prompt: 'Extract the title of the page'
     });
     console.log('Schema:', schema);
@@ -78,7 +78,7 @@ async function testScrapeOutputJson() {
       }
     };
     
-    const results = await sdk.aiScrape.scrape(options);
+    const results = await sdk.aiScraper.scrape(options);
     console.log('Sync scraping results:', results);
   } catch (error) {
     console.error('Sync scraping error:', error.message);
@@ -95,7 +95,7 @@ testScrapeOutputJson();
 - `render_html` (*boolean*): Specifies whether to render JavaScript on the page before extraction. Defaults to `false`.
 - `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
 
-## AI-Crawl
+## AI-Crawler
 
 ### Basic usage
 
@@ -138,7 +138,7 @@ async function testCrawlOutputJson() {
       }
     };
     
-    const results = await sdk.aiCrawl.crawl(options);
+    const results = await sdk.aiCrawler.crawl(options);
     console.log('Crawling results:', JSON.stringify(results, null, 2));      
   } catch (error) {
     console.error('Crawling error:', error.message);
@@ -157,7 +157,7 @@ testCrawlOutputJson();
 - `render_html` (*boolean*): Specifies whether to render JavaScript on the pages before extraction. Defaults to `false`.
 - `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
 
-## AI-Browser-Agent
+## Browser-Agent
 
 ### Basic usage
 
@@ -189,7 +189,7 @@ async function testBrowseOutputJson() {
       }
     };
     
-    const results = await sdk.aiBrowse.browse(options);
+    const results = await sdk.browserAgent.browse(options);
     console.log('Sync browsing results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Sync browsing error:', error.message);
@@ -253,7 +253,7 @@ testSearch();
 
 You can find more examples of each application here:
 
-- [AI-Browse Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-browse.js)
-- [AI-Crawl Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-crawl.js)
-- [AI-Scrape Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-scrape.js)
+- [Browser-agent Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/browser-agent.js)
+- [AI-Crawler Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-crawler.js)
+- [AI-Scraper Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-scraper.js)
 - [AI-Search Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-search.js)

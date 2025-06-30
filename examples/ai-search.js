@@ -18,7 +18,7 @@ async function testSearchWithoutContent() {
     };
     
     const results = await sdk.aiSearch.search(options, timeout);
-    console.log('searching results:', results);
+    console.log('searching results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('searching error:', error.message);
   }
@@ -36,7 +36,7 @@ async function testSearchWithContent() {
     };
     
     const results = await sdk.aiSearch.search(options, timeout);
-    console.log('searching results:', results);
+    console.log('searching results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('searching error:', error.message);
   }

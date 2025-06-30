@@ -10,10 +10,10 @@ const timeout = 120000;
 async function testGenerateSchema() {
   try {
     console.log('Testing schema generation...');
-    const schema = await sdk.aiScrape.generateSchema({
+    const schema = await sdk.aiScraper.generateSchema({
       user_prompt: 'Extract the title of the page'
     });
-    console.log('Schema:', schema);
+    console.log('Schema:', JSON.stringify(schema, null, 2));
   } catch (error) {
     console.error('Schema generation error:', error.message);
   }
@@ -29,8 +29,8 @@ async function testScrapeAutoSchema() {
       output_format: OutputFormat.JSON,
     };
     
-    const results = await sdk.aiScrape.scrapeWithAutoSchema(options, timeout);
-    console.log('Sync scraping results:', results);
+    const results = await sdk.aiScraper.scrapeWithAutoSchema(options, timeout);
+    console.log('Sync scraping results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Sync scraping error:', error.message);
   }
@@ -51,8 +51,8 @@ async function testScrapeOutputJson() {
       }
     };
     
-    const results = await sdk.aiScrape.scrape(options, timeout);
-    console.log('Sync scraping results:', results);
+    const results = await sdk.aiScraper.scrape(options, timeout);
+    console.log('Sync scraping results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Sync scraping error:', error.message);
   }
@@ -67,8 +67,8 @@ async function testScrapeOutputMarkdown() {
       output_format: OutputFormat.MARKDOWN,
     };
     
-    const results = await sdk.aiScrape.scrape(options, timeout);
-    console.log('Sync scraping results:', results);
+    const results = await sdk.aiScraper.scrape(options, timeout);
+    console.log('Sync scraping results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Sync scraping error:', error.message);
   }
@@ -78,7 +78,7 @@ async function testScrapeOutputMarkdown() {
 console.log('\n=== Testing AI Scrape Examples ===');
 
 // Run examples
-testGenerateSchema();
-testScrapeOutputJson();
-testScrapeOutputMarkdown(); 
-testScrapeAutoSchema(); 
+await testGenerateSchema();
+await testScrapeOutputJson();
+await testScrapeOutputMarkdown(); 
+await testScrapeAutoSchema(); 

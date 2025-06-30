@@ -12,27 +12,32 @@ async function testCrawlOutputJson() {
     const options = {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
-      user_prompt: 'Get job ad pages',
+      crawl_prompt: 'Get job ad pages and extract position titles and salaries',
       max_pages: 3,
       openapi_schema: {
-        type: "object",
-        properties: {
-          jobAd: {
-            type: "object",
-            properties: {
-              position_title: {
-                type: "string"
-              },
-              salary: {
-                type: "string"
-              }
+        "type": "object",
+        "properties": {
+            "jobAds": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "positionTitle": {
+                            "type": "string"
+                        },
+                        "salary": {
+                            "type": "number"
+                        }
+                    },
+                    "required": []
+                }
             }
-          }
-        }
-      }
-    };
+        },
+        "required": []
+    }
+  };
     
-    const results = await sdk.aiCrawl.crawl(options);
+    const results = await sdk.aiCrawler.crawl(options);
     console.log('Crawling results:', JSON.stringify(results, null, 2));      
   } catch (error) {
     console.error('Crawling error:', error.message);
@@ -45,12 +50,13 @@ async function testCrawlAutoSchema() {
     
     const options = {
       url: 'https://www.freelancer.com',
-      user_prompt: 'Get job ad pages and extract position titles and salaries',
+      crawl_prompt: 'Get job ad pages and extract position titles and salaries',
+      parse_prompt: 'job ad pages and extract position titles and salaries',
       max_pages: 2,
       output_format: OutputFormat.JSON,
     };
     
-    const results = await sdk.aiCrawl.crawlWithAutoSchema(options);
+    const results = await sdk.aiCrawler.crawlWithAutoSchema(options, 240000);
     console.log('Auto-schema crawling results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Auto-schema crawling error:', error.message);
@@ -64,12 +70,12 @@ async function testCrawlOutputMarkdown() {
     const options = {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.MARKDOWN,
-      user_prompt: 'Get job ad pages',
+      crawl_prompt: 'Get job ad pages',
       max_pages: 2,
     };
     
-    const results = await sdk.aiCrawl.crawl(options);
-    console.log('Crawling results as markdown:', results);
+    const results = await sdk.aiCrawler.crawl(options);
+    console.log('Crawling results as markdown:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Crawling error:', error.message);
   }
@@ -79,6 +85,6 @@ async function testCrawlOutputMarkdown() {
 console.log('\n=== Testing AI Crawl Examples ===');
 
 // Run examples
-testCrawlOutputJson();
-testCrawlAutoSchema();
-testCrawlOutputMarkdown(); 
+await testCrawlOutputJson();
+await testCrawlAutoSchema();
+await testCrawlOutputMarkdown(); 

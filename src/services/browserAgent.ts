@@ -11,7 +11,7 @@ import {
  * AI-Browse Service
  * Handles all AI-Browse related API calls
  */
-export class AiBrowseService {
+export class BrowserAgentService {
   private client: OxylabsAIStudioClient;
 
   constructor(client: OxylabsAIStudioClient) {
@@ -113,6 +113,7 @@ export class AiBrowseService {
       user_prompt: options.parse_prompt
     });
 
+    console.log('schemaResult', JSON.stringify(schemaResult, null, 2));
     // Then perform synchronous browsing
     return await this.browse({
       url: options.url,

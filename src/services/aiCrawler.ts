@@ -11,7 +11,7 @@ import {
  * AI-Crawl Service
  * Handles all AI-Crawl related API calls
  */
-export class AiCrawlService {
+export class AiCrawlerService {
   private client: OxylabsAIStudioClient;
 
   constructor(client: OxylabsAIStudioClient) {
@@ -92,8 +92,8 @@ export class AiCrawlService {
 
     while (Date.now() - startTime < timeout) {
       const runStatus = await this.getCrawlRunSteps(runId);
+      console.log('runStatus', JSON.stringify(runStatus.run, null, 2));
       const run_status = runStatus.run.status;
-      console.log('Run status:', run_status);
       if (run_status === 'completed' || run_status === 'success') {
         return await this.getCrawlRunData(runId);
       } else if (run_status === 'failed' || run_status === 'error') {
@@ -115,6 +115,8 @@ export class AiCrawlService {
       user_prompt: options.parse_prompt
     });
 
+    // save schema to file locally
+    console.log('schemaResult', JSON.stringify(schemaResult.openapi_schema, null, 2));
     // Then perform synchronous crawling
     return await this.crawl({
       url: options.url,

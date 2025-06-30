@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv';
 import { OxylabsAIStudioClient } from './client.js';
-import { AiBrowseService } from './services/aiBrowse.js';
-import { AiCrawlService } from './services/aiCrawl.js';
-import { AiScrapeService } from './services/aiScrape.js';
+import { BrowserAgentService } from './services/browserAgent.js';
+import { AiCrawlerService } from './services/aiCrawler.js';
+import { AiScraperService } from './services/aiScraper.js';
 import { AiSearchService } from './services/aiSearch.js';
 import { SDKConfig } from './types.js';
 import { MissingApiKeyError, MissingApiUrlError } from './errors.js';
@@ -16,9 +16,9 @@ dotenv.config();
 export class OxylabsAIStudioSDK {
   public readonly config: Required<SDKConfig>;
   public readonly client: OxylabsAIStudioClient;
-  public readonly aiScrape: AiScrapeService;
-  public readonly aiCrawl: AiCrawlService;
-  public readonly aiBrowse: AiBrowseService;
+  public readonly aiScraper: AiScraperService;
+  public readonly aiCrawler: AiCrawlerService;
+  public readonly browserAgent: BrowserAgentService;
   public readonly aiSearch: AiSearchService;
   constructor(config: SDKConfig = {}) {
     const apiUrl = config.apiUrl || process.env.OXYLABS_AI_STUDIO_API_URL || '';
@@ -45,9 +45,9 @@ export class OxylabsAIStudioSDK {
     this.client = new OxylabsAIStudioClient(this.config);
 
     // Initialize services
-    this.aiScrape = new AiScrapeService(this.client);
-    this.aiCrawl = new AiCrawlService(this.client);
-    this.aiBrowse = new AiBrowseService(this.client);
+    this.aiScraper = new AiScraperService(this.client);
+    this.aiCrawler = new AiCrawlerService(this.client);
+    this.browserAgent = new BrowserAgentService(this.client);
     this.aiSearch = new AiSearchService(this.client);
   }
 

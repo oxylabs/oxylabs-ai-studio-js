@@ -22,7 +22,7 @@ async function testBrowseOutputJson() {
       }
     };
     
-    const results = await sdk.aiBrowse.browse(options, timeout);
+    const results = await sdk.browserAgent.browse(options, timeout);
     console.log('Sync browsing results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Sync browsing error:', error.message);
@@ -39,8 +39,8 @@ async function testBrowseOutputMarkdown() {
       user_prompt: 'Navigate to the first job ad you can find.',
     };
     
-    const results = await sdk.aiBrowse.browse(options, timeout);
-    console.log('Sync browsing results as markdown:', results);
+    const results = await sdk.browserAgent.browse(options, timeout);
+    console.log('Sync browsing results as markdown:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Sync browsing error:', error.message);
   }
@@ -56,7 +56,7 @@ async function testBrowseWithAutoSchema() {
       output_format: OutputFormat.JSON,
     };
     
-    const results = await sdk.aiBrowse.browseWithAutoSchema(options, timeout);
+    const results = await sdk.browserAgent.browseWithAutoSchema(options, timeout);
     console.log('Auto-schema browse results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Auto-schema browsing error:', error.message);
@@ -67,6 +67,6 @@ async function testBrowseWithAutoSchema() {
 console.log('\n=== Testing AI Browse Examples ===');
 
 // Run examples
-testBrowseOutputJson();
-testBrowseOutputMarkdown();
-testBrowseWithAutoSchema(); 
+await testBrowseOutputJson();
+await testBrowseOutputMarkdown();
+await testBrowseWithAutoSchema(); 

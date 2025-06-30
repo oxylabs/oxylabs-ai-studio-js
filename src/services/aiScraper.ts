@@ -9,10 +9,10 @@ import {
 } from '../types.js';
 
 /**
- * AI-Scrape Service
- * Handles all AI-Scrape related API calls
+ * AI-Scraper Service
+ * Handles all AI-Scraper related API calls
  */
-export class AiScrapeService {
+export class AiScraperService {
   private client: OxylabsAIStudioClient;
 
   constructor(client: OxylabsAIStudioClient) {
