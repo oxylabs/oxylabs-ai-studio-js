@@ -21,7 +21,7 @@ export class OxylabsAIStudioSDK {
   public readonly browserAgent: BrowserAgentService;
   public readonly aiSearch: AiSearchService;
   constructor(config: SDKConfig = {}) {
-    const apiUrl = config.apiUrl || process.env.OXYLABS_AI_STUDIO_API_URL || '';
+    const apiUrl = config.apiUrl || process.env.OXYLABS_AI_STUDIO_API_URL || 'https://api-aistudio.oxylabs.io';
     const apiKey = config.apiKey || process.env.OXYLABS_AI_STUDIO_API_KEY || '';
 
     if (!apiUrl) {
