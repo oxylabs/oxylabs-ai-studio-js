@@ -14,7 +14,7 @@ async function testBrowseOutputJson() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
       user_prompt: 'Navigate to the first job ad you can find.',
-      openapi_schema: {
+      schema: {
         type: 'object',
         properties: {
           job_title: { type: 'string' }
@@ -52,7 +52,8 @@ async function testBrowseWithAutoSchema() {
     
     const options = {
       url: 'https://www.freelancer.com',
-      user_prompt: 'Navigate to the first job ad and extract job information',
+      user_prompt: 'Navigate to the first job ad',
+      parse_prompt: 'Extract job information from the job ad',
       output_format: OutputFormat.JSON,
     };
     

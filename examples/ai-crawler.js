@@ -12,9 +12,9 @@ async function testCrawlOutputJson() {
     const options = {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
-      crawl_prompt: 'Get job ad pages and extract position titles and salaries',
-      max_pages: 3,
-      openapi_schema: {
+      user_prompt: 'Get job ad pages and extract position titles and salaries',
+      render_sources_limit: 3,
+      schema: {
         "type": "object",
         "properties": {
             "jobAds": {
@@ -50,9 +50,9 @@ async function testCrawlAutoSchema() {
     
     const options = {
       url: 'https://www.freelancer.com',
-      crawl_prompt: 'Get job ad pages and extract position titles and salaries',
+      user_prompt: 'Get job ad pages and extract position titles and salaries',
       parse_prompt: 'job ad pages and extract position titles and salaries',
-      max_pages: 2,
+      render_sources_limit: 2,
       output_format: OutputFormat.JSON,
     };
     
@@ -70,8 +70,8 @@ async function testCrawlOutputMarkdown() {
     const options = {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.MARKDOWN,
-      crawl_prompt: 'Get job ad pages',
-      max_pages: 2,
+      user_prompt: 'Get job ad pages',
+      render_sources_limit: 2,
     };
     
     const results = await sdk.aiCrawler.crawl(options);

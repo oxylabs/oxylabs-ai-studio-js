@@ -57,50 +57,52 @@ export interface ScrapeOptions {
   url: string;
   user_prompt?: string;
   output_format?: OutputFormat | string;
-  openapi_schema?: Record<string, any>;
-  render_html?: boolean;
+  schema?: Record<string, any>;
+  render_javascript?: boolean;
 }
 
 export interface ScrapeWithAutoSchemaOptions {
   url: string;
   user_prompt: string;
+  parse_prompt: string;
   output_format?: OutputFormat | string;
-  render_html?: boolean;
+  render_javascript?: boolean;
 }
 
 // AI Crawl interfaces
 export interface CrawlOptions {
   url: string;
-  crawl_prompt: string;
+  user_prompt: string;
   output_format?: OutputFormat | string;
-  openapi_schema?: Record<string, any>;
-  max_pages?: number;
-  render_html?: boolean;
+  schema?: Record<string, any>;
+  render_javascript?: boolean;
+  render_sources_limit?: number;
 }
 
 export interface CrawlWithAutoSchemaOptions {
   url: string;
-  crawl_prompt: string;
+  user_prompt: string;
   parse_prompt: string;
   output_format: OutputFormat | string;
-  max_pages?: number;
-  render_html?: boolean;
+  schema?: Record<string, any>;
+  render_javascript?: boolean;
+  render_sources_limit?: number;
 }
 
 // AI Browse interfaces
 export interface BrowseOptions {
   url: string;
-  browse_prompt: string;
+  user_prompt: string;
   output_format: OutputFormat | string;
-  openapi_schema: Record<string, any>;
+  schema?: Record<string, any>;
 }
 
 export interface BrowseWithAutoSchemaOptions {
   url: string;
-  browse_prompt: string;
+  user_prompt: string;
   parse_prompt: string;
   output_format?: OutputFormat | string;
-  render_html?: boolean;
+  render_javascript?: boolean;
 }
 
 // HTTP Client interfaces

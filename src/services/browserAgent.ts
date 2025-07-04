@@ -32,12 +32,12 @@ export class BrowserAgentService {
     const payload: any = {
       url: options.url,
       output_format: options.output_format || "markdown",
-      auxiliary_prompt: options.browse_prompt
+      auxiliary_prompt: options.user_prompt
     };
 
     // Only include openapi_schema if output_format is json
-    if (options.output_format === "json" && options.openapi_schema) {
-      payload.openapi_schema = options.openapi_schema;
+    if (options.output_format === "json" && options.schema) {
+      payload.openapi_schema = options.schema;
     }
 
     return await this.client.post<RunResponse>('/browser-agent/run', payload);
@@ -117,9 +117,9 @@ export class BrowserAgentService {
     // Then perform synchronous browsing
     return await this.browse({
       url: options.url,
-      browse_prompt: options.browse_prompt || "",
+      user_prompt: options.user_prompt || "",
       output_format: options.output_format || "markdown",
-      openapi_schema: schemaResult.openapi_schema,
+      schema: schemaResult.openapi_schema,
     }, timeout);
   }
 }

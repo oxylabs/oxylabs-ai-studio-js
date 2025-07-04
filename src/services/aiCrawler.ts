@@ -32,14 +32,14 @@ export class AiCrawlerService {
     const payload: any = {
       domain: options.url, // Note: API expects 'domain' but we use 'url' for consistency
       output_format: options.output_format || "markdown",
-      auxiliary_prompt: options.crawl_prompt,
-      render_html: options.render_html || false,
-      return_sources_limit: options.max_pages || 25
+      auxiliary_prompt: options.user_prompt,
+      render_html: options.render_javascript || false,
+      return_sources_limit: options.render_sources_limit || 25
     };
 
     // Only include openapi_schema if output_format is json
-    if (options.output_format === "json" && options.openapi_schema) {
-      payload.openapi_schema = options.openapi_schema;
+    if (options.output_format === "json" && options.schema) {
+      payload.openapi_schema = options.schema;
     }
 
     return await this.client.post<RunResponse>('/extract/run', payload);
@@ -92,7 +92,7 @@ export class AiCrawlerService {
 
     while (Date.now() - startTime < timeout) {
       const runStatus = await this.getCrawlRunSteps(runId);
-      console.log('runStatus', JSON.stringify(runStatus.run, null, 2));
+      console.log('runStatus: ', runStatus.run.status);
       const run_status = runStatus.run.status;
       if (run_status === 'completed' || run_status === 'success') {
         return await this.getCrawlRunData(runId);
@@ -120,11 +120,11 @@ export class AiCrawlerService {
     // Then perform synchronous crawling
     return await this.crawl({
       url: options.url,
-      crawl_prompt: options.crawl_prompt || "",
+      user_prompt: options.user_prompt || "",
       output_format: options.output_format || "markdown",
-      openapi_schema: schemaResult.openapi_schema,
-      max_pages: options.max_pages,
-      render_html: options.render_html || false
+      schema: schemaResult.openapi_schema,
+      render_javascript: options.render_javascript || false,
+      render_sources_limit: options.render_sources_limit || 25
     }, timeout);
   }
 }
