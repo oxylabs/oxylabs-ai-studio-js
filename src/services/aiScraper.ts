@@ -30,16 +30,15 @@ export class AiScraperService {
    * Submit scraping request (POST /scrape)
    */
   async submitScrapeRequest(options: ScrapeOptions): Promise<RunResponse> {
-    console.log('Submitting scrape request with options:', options);
     const payload: any = {
       url: options.url,
       output_format: options.output_format || "markdown",
-      render_html: options.render_html || false
+      render_html: options.render_javascript || false
     };
 
     // Only include openapi_schema if output_format is json
-    if (options.output_format === "json" && options.openapi_schema) {
-      payload.openapi_schema = options.openapi_schema;
+    if (options.output_format === "json" && options.schema) {
+      payload.openapi_schema = options.schema;
     }
 
     return await this.client.post<RunResponse>('/scrape', payload);
@@ -112,16 +111,16 @@ export class AiScraperService {
   async scrapeWithAutoSchema(options: ScrapeWithAutoSchemaOptions, timeout = 60000): Promise<any> {
     // Generate schema first
     const schemaResult = await this.generateSchema({
-      user_prompt: options.user_prompt
+      user_prompt: options.parse_prompt
     });
 
     // Then perform synchronous scraping
     return await this.scrape({
       url: options.url,
-      user_prompt: "",
+      user_prompt: options.user_prompt,
       output_format: options.output_format || "markdown",
-      openapi_schema: schemaResult.openapi_schema,
-      render_html: options.render_html || false
+      schema: schemaResult.openapi_schema,
+      render_javascript: options.render_javascript || false
     }, timeout);
   }
 } 

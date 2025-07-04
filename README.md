@@ -70,7 +70,7 @@ async function testScrapeOutputJson() {
       url: 'https://www.freelancer.com',
       user_prompt: 'Extract all links',
       output_format: OutputFormat.JSON,
-      openapi_schema: {
+      schema: {
         type: 'object',
         properties: {
           links: { type: 'array', items: { type: 'string' } }
@@ -119,8 +119,8 @@ async function testCrawlOutputJson() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
       user_prompt: 'Get job ad pages',
-      max_pages: 3,
-      openapi_schema: {
+      return_sources_limit: 3,
+      schema: {
         type: "object",
         properties: {
           jobAd: {
@@ -181,7 +181,7 @@ async function testBrowseOutputJson() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
       user_prompt: 'Navigate to the first job ad you can find.',
-      openapi_schema: {
+      schema: {
         type: 'object',
         properties: {
           job_title: { type: 'string' }

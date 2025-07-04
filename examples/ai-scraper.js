@@ -43,7 +43,7 @@ async function testScrapeOutputJson() {
     const options = {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
-      openapi_schema: {
+      schema: {
         type: 'object',
         properties: {
           links: { type: 'array', items: { type: 'string' } }
