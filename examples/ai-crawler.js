@@ -13,7 +13,7 @@ async function testCrawlOutputJson() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
       user_prompt: 'Get job ad pages and extract position titles and salaries',
-      render_sources_limit: 3,
+      return_sources_limit: 3,
       schema: {
         "type": "object",
         "properties": {
@@ -52,7 +52,7 @@ async function testCrawlAutoSchema() {
       url: 'https://www.freelancer.com',
       user_prompt: 'Get job ad pages and extract position titles and salaries',
       parse_prompt: 'job ad pages and extract position titles and salaries',
-      render_sources_limit: 2,
+      return_sources_limit: 2,
       output_format: OutputFormat.JSON,
     };
     
@@ -71,7 +71,7 @@ async function testCrawlOutputMarkdown() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.MARKDOWN,
       user_prompt: 'Get job ad pages',
-      render_sources_limit: 2,
+      return_sources_limit: 2,
     };
     
     const results = await sdk.aiCrawler.crawl(options);

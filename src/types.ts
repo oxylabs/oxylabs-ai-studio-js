@@ -76,7 +76,7 @@ export interface CrawlOptions {
   output_format?: OutputFormat | string;
   schema?: Record<string, any>;
   render_javascript?: boolean;
-  render_sources_limit?: number;
+  return_sources_limit?: number;
 }
 
 export interface CrawlWithAutoSchemaOptions {
@@ -86,7 +86,7 @@ export interface CrawlWithAutoSchemaOptions {
   output_format: OutputFormat | string;
   schema?: Record<string, any>;
   render_javascript?: boolean;
-  render_sources_limit?: number;
+  return_sources_limit?: number;
 }
 
 // AI Browse interfaces
