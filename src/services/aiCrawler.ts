@@ -34,7 +34,8 @@ export class AiCrawlerService {
       output_format: options.output_format || "markdown",
       auxiliary_prompt: options.user_prompt,
       render_html: options.render_javascript || false,
-      return_sources_limit: options.return_sources_limit || 25
+      return_sources_limit: options.return_sources_limit || 25,
+      geo_location: options.geo_location || undefined
     };
 
     // Only include openapi_schema if output_format is json
@@ -124,7 +125,8 @@ export class AiCrawlerService {
       output_format: options.output_format || "markdown",
       schema: schemaResult.openapi_schema,
       render_javascript: options.render_javascript || false,
-      return_sources_limit: options.return_sources_limit || 25
+      return_sources_limit: options.return_sources_limit || 25,
+      geo_location: options.geo_location || undefined
     }, timeout);
   }
 }

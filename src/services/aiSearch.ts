@@ -34,6 +34,9 @@ export class AiSearchService {
     if (options.return_content !== undefined) {
       payload.return_content = options.return_content;
     }
+    if (options.geo_location !== undefined) {
+      payload.geo_location = options.geo_location;
+    }
 
     return await this.client.post<RunResponse>('/search/run', payload);
   }
