@@ -25,7 +25,7 @@ async function testScrapeAutoSchema() {
     
     const options = {
       url: 'https://www.freelancer.com',
-      user_prompt: 'Extract all links',
+      parse_prompt: 'Extract all links',
       output_format: OutputFormat.JSON,
     };
     
@@ -65,6 +65,7 @@ async function testScrapeOutputMarkdown() {
     const options = {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.MARKDOWN,
+      geo_location: 'DE',
     };
     
     const results = await sdk.aiScraper.scrape(options, timeout);

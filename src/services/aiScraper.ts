@@ -33,7 +33,8 @@ export class AiScraperService {
     const payload: any = {
       url: options.url,
       output_format: options.output_format || "markdown",
-      render_html: options.render_javascript || false
+      render_html: options.render_javascript || false,
+      geo_location: options.geo_location || undefined
     };
 
     // Only include openapi_schema if output_format is json
@@ -117,10 +118,10 @@ export class AiScraperService {
     // Then perform synchronous scraping
     return await this.scrape({
       url: options.url,
-      user_prompt: options.user_prompt,
       output_format: options.output_format || "markdown",
       schema: schemaResult.openapi_schema,
-      render_javascript: options.render_javascript || false
+      render_javascript: options.render_javascript || false,
+      geo_location: options.geo_location || undefined
     }, timeout);
   }
 } 

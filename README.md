@@ -70,6 +70,7 @@ async function testScrapeOutputJson() {
       url: 'https://www.freelancer.com',
       user_prompt: 'Extract all links',
       output_format: OutputFormat.JSON,
+      geo_location: "US",
       schema: {
         type: 'object',
         properties: {
@@ -94,6 +95,7 @@ testScrapeOutputJson();
 - `output_format` (*string*): The desired format for the output. Can be either `markdown` or `json`. Defaults to `markdown`.
 - `render_html` (*boolean*): Specifies whether to render JavaScript on the page before extraction. Defaults to `false`.
 - `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
+- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
 ## AI-Crawler
 
@@ -120,6 +122,7 @@ async function testCrawlOutputJson() {
       output_format: OutputFormat.JSON,
       user_prompt: 'Get job ad pages',
       return_sources_limit: 3,
+      geo_location: "DE",
       schema: {
         type: "object",
         properties: {
@@ -156,6 +159,7 @@ testCrawlOutputJson();
 - `max_pages` (*integer*): The maximum number of pages or sources to return. Defaults to `25`.
 - `render_html` (*boolean*): Specifies whether to render JavaScript on the pages before extraction. Defaults to `false`.
 - `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
+- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
 ## Browser-Agent
 
@@ -181,6 +185,7 @@ async function testBrowseOutputJson() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.JSON,
       user_prompt: 'Navigate to the first job ad you can find.',
+      geo_location: "US",
       schema: {
         type: 'object',
         properties: {
@@ -206,6 +211,7 @@ testBrowseOutputJson();
 - `output_format` (*string*): The desired format for the output. Can be `markdown`, `html`, `json`, or `screenshot`. Defaults to `markdown`.
 - `render_html` (*boolean*): Specifies whether to render JavaScript on the page. Although this is a browser agent, this flag might influence certain behaviors. Defaults to `false`.
 - `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
+- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
 ## AI-Search
 
@@ -231,6 +237,7 @@ async function testSearch() {
       limit: 3,
       return_content: true,
       render_javascript: false,
+      geo_location: "IT",
     };
 
     const results = await sdk.aiSearch.search(options);
@@ -248,6 +255,7 @@ testSearch();
 - `limit` (*integer*): The maximum number of search results to return. Maximum: 50.
 - `render_javascript` (*boolean*): Whether to render JavaScript on the page. Defaults to `false`.
 - `return_content` (*boolean*): Whether to return the markdown content of each of the search result. Defaults to `true`.
+- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
 ## Running Examples
 

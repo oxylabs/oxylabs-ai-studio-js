@@ -54,6 +54,7 @@ async function testCrawlAutoSchema() {
       parse_prompt: 'job ad pages and extract position titles and salaries',
       return_sources_limit: 2,
       output_format: OutputFormat.JSON,
+      geo_location: 'US',
     };
     
     const results = await sdk.aiCrawler.crawlWithAutoSchema(options, 240000);
@@ -72,6 +73,7 @@ async function testCrawlOutputMarkdown() {
       output_format: OutputFormat.MARKDOWN,
       user_prompt: 'Get job ad pages',
       return_sources_limit: 2,
+      geo_location: 'US',
     };
     
     const results = await sdk.aiCrawler.crawl(options);

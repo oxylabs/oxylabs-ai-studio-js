@@ -11,10 +11,11 @@ async function testSearchWithoutContent() {
     console.log('Testing search without content...');
     
     const options = {
-      query: 'lasagna recipes',
+      query: 'lasagna',
       limit: 10,
       return_content: false,
       render_javascript: false,
+      geo_location: 'IT',
     };
     
     const results = await sdk.aiSearch.search(options, timeout);

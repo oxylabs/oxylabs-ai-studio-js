@@ -32,7 +32,8 @@ export class BrowserAgentService {
     const payload: any = {
       url: options.url,
       output_format: options.output_format || "markdown",
-      auxiliary_prompt: options.user_prompt
+      auxiliary_prompt: options.user_prompt,
+      geo_location: options.geo_location || undefined
     };
 
     // Only include openapi_schema if output_format is json
@@ -120,6 +121,7 @@ export class BrowserAgentService {
       user_prompt: options.user_prompt || "",
       output_format: options.output_format || "markdown",
       schema: schemaResult.openapi_schema,
+      geo_location: options.geo_location || undefined
     }, timeout);
   }
 }
