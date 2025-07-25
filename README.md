@@ -2,8 +2,7 @@
 
 [![AI-Studio Java (1)](https://raw.githubusercontent.com/oxylabs/oxylabs-ai-studio-js/refs/heads/main/images/banner1.png)](https://aistudio.oxylabs.io/?utm_source=877&utm_medium=affiliate&groupid=877&utm_content=ai-studio-js-github&transaction_id=102f49063ab94276ae8f116d224b67) 
 
-A JavaScript SDK for seamlessly interacting with [Oxylabs AI Studio API](https://aistudio.oxylabs.io/apps)
- services, including AI-Scraper, AI-Crawler, AI-Browser-Agent and other data extraction tools.
+A JavaScript SDK for seamlessly interacting with [Oxylabs AI Studio API](https://aistudio.oxylabs.io/apps) services, including AI-Scraper, AI-Crawler, AI-Browser-Agent and other data extraction tools.
 
 ## Installation
 
