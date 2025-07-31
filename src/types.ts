@@ -143,3 +143,12 @@ export interface AiSearchRun {
   message: string | null;
   data: SearchResult[] | null;
 }
+
+export interface MapOptions {
+  url: string;
+  user_prompt?: string;
+  max_depth?: number;
+  return_sources_limit?: number;
+  geo_location?: string;
+  render_javascript?: boolean;
+}
