@@ -259,6 +259,52 @@ testSearch();
 - `return_content` (*boolean*): Whether to return the markdown content of each of the search result. Defaults to `true`.
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
+## AI-Map
+
+### Basic usage
+
+```javascript
+import { 
+  OxylabsAIStudioSDK
+} from 'oxylabs-ai-studio';
+
+const sdk = new OxylabsAIStudioSDK({
+  apiKey: 'your_api_key_here',
+  timeout: 120000,
+  retryAttempts: 3,
+});
+
+async function testMap() {
+  try {
+    console.log('Testing map...');
+    
+    const options = {
+      url: 'https://www.freelancer.com/jobs',
+      user_prompt: 'Extract tech job ads',
+      max_depth: 2,
+      return_sources_limit: 10,
+      geo_location: 'US',
+      render_javascript: false
+    };
+    
+    const results = await sdk.aiMap.map(options);
+    console.log('Map results:', JSON.stringify(results, null, 2));
+  } catch (error) {
+    console.error('Map error:', error.message);
+  }
+}
+
+testMap();
+```
+
+### Available Parameters
+- `url` (*string*): The target URL to map and extract data from.
+- `user_prompt` (*string*): Instructions for what data to extract from the mapped pages.
+- `max_depth` (*integer*): The maximum depth level for mapping nested pages or structures.
+- `return_sources_limit` (*integer*): The maximum number of sources/pages to return from the mapping process.
+- `geo_location` (*string*): The geographical location to use for the mapping request (e.g., 'US', 'UK').
+- `render_javascript` (*boolean*): Specifies whether to render JavaScript on the pages before mapping. Defaults to `false`.
+
 ## Running Examples
 
 You can find more examples of each application here:
@@ -267,3 +313,4 @@ You can find more examples of each application here:
 - [AI-Crawler Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-crawler.js)
 - [AI-Scraper Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-scraper.js)
 - [AI-Search Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-search.js)
+- [AI-Map Example](https://github.com/oxylabs/oxylabs-ai-studio-js/blob/main/examples/ai-map.js)

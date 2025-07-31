@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import { OxylabsAIStudioClient } from './client.js';
 import { BrowserAgentService } from './services/browserAgent.js';
 import { AiCrawlerService } from './services/aiCrawler.js';
+import { AiMapService } from './services/aiMap.js';
 import { AiScraperService } from './services/aiScraper.js';
 import { AiSearchService } from './services/aiSearch.js';
 import { SDKConfig } from './types.js';
@@ -20,6 +21,7 @@ export class OxylabsAIStudioSDK {
   public readonly aiCrawler: AiCrawlerService;
   public readonly browserAgent: BrowserAgentService;
   public readonly aiSearch: AiSearchService;
+  public readonly aiMap: AiMapService;
   constructor(config: SDKConfig = {}) {
     const apiUrl = config.apiUrl || process.env.OXYLABS_AI_STUDIO_API_URL || 'https://api-aistudio.oxylabs.io';
     const apiKey = config.apiKey || process.env.OXYLABS_AI_STUDIO_API_KEY || '';
@@ -49,6 +51,7 @@ export class OxylabsAIStudioSDK {
     this.aiCrawler = new AiCrawlerService(this.client);
     this.browserAgent = new BrowserAgentService(this.client);
     this.aiSearch = new AiSearchService(this.client);
+    this.aiMap = new AiMapService(this.client);
   }
 
   /**
