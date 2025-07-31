@@ -1,6 +1,6 @@
 {
   "name": "oxylabs-ai-studio",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "JavaScript SDK for Oxylabs AI Studio API services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
