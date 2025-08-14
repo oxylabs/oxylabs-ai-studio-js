@@ -146,8 +146,7 @@ export interface AiSearchRun {
 
 export interface MapOptions {
   url: string;
-  user_prompt?: string;
-  max_depth?: number;
+  user_prompt: string;
   return_sources_limit?: number;
   geo_location?: string;
   render_javascript?: boolean;

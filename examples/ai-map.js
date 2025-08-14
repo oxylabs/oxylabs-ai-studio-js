@@ -1,22 +1,28 @@
-import { OxylabsAIStudioSDK } from 'oxylabs-ai-studio';
-
-
-const sdk = new OxylabsAIStudioSDK();
-
-async function testMap() {
+import { 
+    OxylabsAIStudioSDK, 
+  } from 'oxylabs-ai-studio';
+  
+  const sdk = new OxylabsAIStudioSDK();
+  
+  async function testAiMap() {
     try {
-        console.log('Testing map...');
-        const map = await sdk.aiMap.map({
-            url: 'https://www.freelancer.com/jobs',
-            user_prompt: 'Extract tech job ads',
-            max_depth: 2,
-            return_sources_limit: 10,
-            geo_location: 'US',
-        });
-        console.log('Map:', JSON.stringify(map, null, 2));
+      console.log('Testing ai-map...');
+      
+      const options = {
+        url: 'https://career.oxylabs.io',
+        user_prompt: 'job ad pages',
+        render_javascript: false,
+        return_sources_limit: 10,
+        geo_location: 'US',
+    };
+      
+      const results = await sdk.aiMap.map(options);
+      console.log('Results:', JSON.stringify(results, null, 2));      
     } catch (error) {
-        console.error('Map error:', error.message);
+      console.error('Error:', error.message);
     }
-}
-
-await testMap();
+  }
+  
+  console.log('\n=== Testing AI Map Examples ===');
+  
+  await testAiMap();
