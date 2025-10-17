@@ -283,7 +283,6 @@ async function testMap() {
     const options = {
       url: 'https://www.freelancer.com/jobs',
       user_prompt: 'Extract tech job ads',
-      max_depth: 2,
       return_sources_limit: 10,
       geo_location: 'US',
       render_javascript: false
@@ -302,7 +301,6 @@ testMap();
 ### Available Parameters
 - `url` (*string*): The target URL to map and extract data from.
 - `user_prompt` (*string*): Instructions for what data to extract from the mapped pages.
-- `max_depth` (*integer*): The maximum depth level for mapping nested pages or structures.
 - `return_sources_limit` (*integer*): The maximum number of sources/pages to return from the mapping process.
 - `geo_location` (*string*): The geographical location to use for the mapping request (e.g., 'US', 'UK').
 - `render_javascript` (*boolean*): Specifies whether to render JavaScript on the pages before mapping. Defaults to `false`.

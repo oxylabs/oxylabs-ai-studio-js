@@ -62,6 +62,9 @@ export class OxylabsAIStudioClient {
         if (this.config.debug) {
           console.error('[DEBUG] Error:', error.response?.data || error.message);
         }
+        if (error.response?.status === 429) {
+          console.warn('[WARN] 429 Too Many Requests. Consider reducing request rate.');
+        }
         return Promise.reject(this.handleError(error));
       }
     );
