@@ -58,6 +58,28 @@ async function testScrapeOutputJson() {
   }
 }
 
+async function testScrapeOutputCsv() {
+  try {
+    console.log('Testing synchronous scraping with JSON output...');
+    
+    const options = {
+      url: 'https://www.freelancer.com',
+      output_format: OutputFormat.CSV,
+      schema: {
+        type: 'object',
+        properties: {
+          links: { type: 'array', items: { type: 'string' } }
+        }
+      }
+    };
+    
+    const results = await sdk.aiScraper.scrape(options, timeout);
+    console.log('Sync scraping results:', JSON.stringify(results, null, 2));
+  } catch (error) {
+    console.error('Sync scraping error:', error.message);
+  }
+}
+
 async function testScrapeOutputMarkdown() {
   try {
     console.log('Testing synchronous scraping with Markdown output...');
@@ -79,7 +101,8 @@ async function testScrapeOutputMarkdown() {
 console.log('\n=== Testing AI Scrape Examples ===');
 
 // Run examples
-await testGenerateSchema();
-await testScrapeOutputJson();
-await testScrapeOutputMarkdown(); 
-await testScrapeAutoSchema(); 
+// await testGenerateSchema();
+// await testScrapeOutputJson();
+await testScrapeOutputCsv();
+// await testScrapeOutputMarkdown(); 
+// await testScrapeAutoSchema(); 

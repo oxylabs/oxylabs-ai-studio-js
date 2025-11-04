@@ -37,8 +37,8 @@ export class AiScraperService {
       geo_location: options.geo_location || undefined
     };
 
-    // Only include openapi_schema if output_format is json
-    if (options.output_format === "json" && options.schema) {
+    // Only include openapi_schema if output_format is json or csv
+    if ((options.output_format === "json" || options.output_format === "csv") && options.schema) {
       payload.openapi_schema = options.schema;
     }
 

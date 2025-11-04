@@ -29,6 +29,29 @@ async function testBrowseOutputJson() {
   }
 }
 
+async function testBrowseOutputCsv() {
+  try {
+    console.log('Testing synchronous browsing with CSV output...');
+    
+    const options = {
+      url: 'https://www.freelancer.com',
+      output_format: OutputFormat.CSV,
+      user_prompt: 'Navigate to the first job ad you can find.',
+      schema: {
+        type: 'object',
+        properties: {
+          job_title: { type: 'string' }
+        }
+      }
+    };
+    
+    const results = await sdk.browserAgent.browse(options, timeout);
+    console.log('Sync browsing results:', JSON.stringify(results, null, 2));
+  } catch (error) {
+    console.error('Sync browsing error:', error.message);
+  }
+}
+
 async function testBrowseOutputMarkdown() {
   try {
     console.log('Testing synchronous browsing with Markdown output...');
@@ -70,5 +93,6 @@ console.log('\n=== Testing AI Browse Examples ===');
 
 // Run examples
 await testBrowseOutputJson();
+await testBrowseOutputCsv();
 await testBrowseOutputMarkdown();
 await testBrowseWithAutoSchema(); 
