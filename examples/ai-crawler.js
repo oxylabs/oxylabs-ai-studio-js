@@ -44,6 +44,45 @@ async function testCrawlOutputJson() {
   }
 }
 
+async function testCrawlOutputCsv() {
+  try {
+    console.log('Testing crawling with JSON output...');
+    
+    const options = {
+      url: 'https://www.freelancer.com',
+      output_format: OutputFormat.CSV,
+      user_prompt: 'Get job ad pages and extract position titles and salaries',
+      return_sources_limit: 3,
+      schema: {
+        "type": "object",
+        "properties": {
+            "jobAds": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "positionTitle": {
+                            "type": "string"
+                        },
+                        "salary": {
+                            "type": "number"
+                        }
+                    },
+                    "required": []
+                }
+            }
+        },
+        "required": []
+    }
+  };
+    
+    const results = await sdk.aiCrawler.crawl(options);
+    console.log('Crawling results:', JSON.stringify(results, null, 2));      
+  } catch (error) {
+    console.error('Crawling error:', error.message);
+  }
+}
+
 async function testCrawlAutoSchema() {
   try {
     console.log('Testing crawling with auto-schema...');
@@ -88,5 +127,6 @@ console.log('\n=== Testing AI Crawl Examples ===');
 
 // Run examples
 await testCrawlOutputJson();
+await testCrawlOutputCsv();
 await testCrawlAutoSchema();
 await testCrawlOutputMarkdown(); 

@@ -19,7 +19,10 @@ export enum RunStatus {
 
 export enum OutputFormat {
   MARKDOWN = 'markdown',
-  JSON = 'json'
+  JSON = 'json',
+  CSV = 'csv',
+  SCREENSHOT = 'screenshot',
+  HTML = 'html'
 }
 
 // API Response interfaces

@@ -40,7 +40,7 @@ export class AiCrawlerService {
     };
 
     // Only include openapi_schema if output_format is json
-    if (options.output_format === "json" && options.schema) {
+    if ((options.output_format === "json" || options.output_format === "csv") && options.schema) {
       payload.openapi_schema = options.schema;
     }
 
