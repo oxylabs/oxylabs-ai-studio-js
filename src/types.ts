@@ -60,7 +60,7 @@ export interface ScrapeOptions {
   url: string;
   output_format?: OutputFormat | string;
   schema?: Record<string, any>;
-  render_javascript?: boolean;
+  render_javascript?: boolean | "auto";
   geo_location?: string;
 }
 
@@ -68,7 +68,7 @@ export interface ScrapeWithAutoSchemaOptions {
   url: string;
   parse_prompt: string;
   output_format?: OutputFormat | string;
-  render_javascript?: boolean;
+  render_javascript?: boolean | "auto";
   geo_location?: string;
 }
 
