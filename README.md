@@ -97,7 +97,7 @@ testScrapeOutputJson();
 - `url` (*string*): The target URL to process.
 - `user_prompt` (*string*): Instructions for what data to extract. This is used to automatically generate the `openapi_schema` when using the `scrapeWithAutoSchema` method.
 - `output_format` (*string*): The desired format for the output. Can be either `markdown` or `json`. Defaults to `markdown`.
-- `render_html` (*boolean*): Specifies whether to render JavaScript on the page before extraction. Defaults to `false`.
+- `render_html` (*boolean | string*): Specifies whether to render JavaScript on the page before extraction. Can be set up to `auto`, meaning that we will decide if it's necessary. Defaults to `false`.
 - `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
