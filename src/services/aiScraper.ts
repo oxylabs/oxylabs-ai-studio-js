@@ -38,7 +38,7 @@ export class AiScraperService {
     };
 
     // Only include openapi_schema if output_format is json or csv
-    if ((options.output_format === "json" || options.output_format === "csv") && options.schema) {
+    if ((options.output_format === "json" || options.output_format === "csv" || options.output_format === "toon") && options.schema) {
       payload.openapi_schema = options.schema;
     }
 

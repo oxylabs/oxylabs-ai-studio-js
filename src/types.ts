@@ -22,7 +22,8 @@ export enum OutputFormat {
   JSON = 'json',
   CSV = 'csv',
   SCREENSHOT = 'screenshot',
-  HTML = 'html'
+  HTML = 'html',
+  TOON = "toon"
 }
 
 // API Response interfaces
