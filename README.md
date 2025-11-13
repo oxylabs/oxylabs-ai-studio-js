@@ -96,9 +96,9 @@ testScrapeOutputJson();
 ### Available Parameters
 - `url` (*string*): The target URL to process.
 - `user_prompt` (*string*): Instructions for what data to extract. This is used to automatically generate the `openapi_schema` when using the `scrapeWithAutoSchema` method.
-- `output_format` (*string*): The desired format for the output. Can be either `markdown` or `json`. Defaults to `markdown`.
+- `output_format` (*string*): The desired format for the output. Can be either `markdown`, `json`, `screenshot`, `csv` or `toon`. Defaults to `markdown`.
 - `render_html` (*boolean | string*): Specifies whether to render JavaScript on the page before extraction. Can be set up to `auto`, meaning that we will decide if it's necessary. Defaults to `false`.
-- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
+- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`, `csv` or `toon`.
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
 ## AI-Crawler
@@ -159,10 +159,10 @@ testCrawlOutputJson();
 - `url` (*string*): The starting URL for the crawl.
 - `crawl_prompt` (*string*): Instructions defining the types of pages to find and crawl.
 - `parse_prompt` (*string*): Instructions for what data to extract from the crawled pages. This is used to automatically generate the `openapi_schema` when using the `crawlWithAutoSchema` method.
-- `output_format` (*string*): The desired format for the output. Can be either `markdown` or `json`. Defaults to `markdown`.
+- `output_format` (*string*): The desired format for the output. Can be either `markdown`, `json`, `csv` or `toon`. Defaults to `markdown`.
 - `max_pages` (*integer*): The maximum number of pages or sources to return. Defaults to `25`.
 - `render_html` (*boolean*): Specifies whether to render JavaScript on the pages before extraction. Defaults to `false`.
-- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
+- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`, `csv` or `toon`.
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
 ## Browser-Agent
@@ -212,9 +212,9 @@ testBrowseOutputJson();
 - `url` (*string*): The target URL for the browser agent to start at.
 - `browse_prompt` (*string*): Instructions defining the actions the browser agent should perform.
 - `parse_prompt` (*string*): Instructions for what data to extract after performing the browser actions. This is used to automatically generate the `openapi_schema` when using the `browseWithAutoSchema` method.
-- `output_format` (*string*): The desired format for the output. Can be `markdown`, `html`, `json`, or `screenshot`. Defaults to `markdown`.
+- `output_format` (*string*): The desired format for the output. Can be `markdown`, `html`, `json`, `csv`, `toon`, or `screenshot`. Defaults to `markdown`.
 - `render_html` (*boolean*): Specifies whether to render JavaScript on the page. Although this is a browser agent, this flag might influence certain behaviors. Defaults to `false`.
-- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`.
+- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`, `csv` or `toon`.
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
 ## AI-Search
