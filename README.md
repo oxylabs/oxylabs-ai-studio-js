@@ -261,6 +261,29 @@ testSearch();
 - `return_content` (*boolean*): Whether to return the markdown content of each of the search result. Defaults to `true`.
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
 
+### Performance Optimization
+
+The `search()` method automatically optimizes performance by intelligently choosing between two endpoints:
+
+**Instant Endpoint** (used automatically when):
+- `limit` is ≤ 10 (or undefined)
+- AND `return_content` is `false` (or undefined)
+
+This provides real-time results without polling for faster response times.
+
+**Polling-based Endpoint** (used when):
+- `limit` > 10
+- OR `return_content` is `true`
+
+You can also directly use `search_instant()` method if you want to explicitly use the instant endpoint:
+
+```javascript
+const results = await sdk.aiSearch.search_instant({
+  query: 'weather today',
+  geo_location: 'United States'
+});
+```
+
 ## AI-Map
 
 ### Basic usage

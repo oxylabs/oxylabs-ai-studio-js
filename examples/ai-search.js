@@ -43,9 +43,26 @@ async function testSearchWithContent() {
   }
 }
 
+async function testInstantSearch() {
+  try {
+    console.log('Testing instant search...');
+    
+    const options = {
+      query: 'weather today',
+      geo_location: 'United States',
+    };
+    
+    const results = await sdk.aiSearch.search_instant(options);
+    console.log('Instant search results:', JSON.stringify(results, null, 2));
+  } catch (error) {
+    console.error('Instant search error:', error.message);
+  }
+}
+
 // Main execution
 console.log('\n=== Testing AI Search Examples ===');
 
 // Run examples
 await testSearchWithoutContent();
 await testSearchWithContent();
+await testInstantSearch();
