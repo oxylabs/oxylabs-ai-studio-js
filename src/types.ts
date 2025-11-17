@@ -148,6 +148,12 @@ export interface AiSearchRun {
   data: SearchResult[] | null;
 }
 
+export interface SearchInstantResponse {
+  run_id: string;
+  data: SearchResult[] | null;
+  status: string;
+}
+
 export interface MapOptions {
   url: string;
   user_prompt: string;

@@ -4,6 +4,7 @@ import {
   RunResponse,
   AiSearchRun,
   SearchRunDataResponse,
+  SearchInstantResponse,
 } from '../types';
 
 /**
@@ -41,6 +42,30 @@ export class AiSearchService {
     return await this.client.post<RunResponse>('/search/run', payload);
   }
 
+  /**
+   * Submit instant search request (POST /search/instant)
+   * Returns data in realtime on the same connection without polling
+   */
+  async search_instant(options: SearchOptions): Promise<SearchInstantResponse> {
+    const payload: Record<string, any> = {
+      query: options.query,
+    };
+    
+    if (options.geo_location !== undefined) {
+      payload.geo_location = options.geo_location;
+    }
+    if (options.limit !== undefined) {
+      payload.limit = options.limit;
+    }
+    if (options.render_javascript !== undefined) {
+      payload.render_html = options.render_javascript;
+    }
+    if (options.return_content !== undefined) {
+      payload.return_content = options.return_content;
+    }
+
+    return await this.client.post<SearchInstantResponse>('/search/instant', payload);
+  }
 
   /**
    * Get search run data/results (GET /search/run/data)
@@ -60,8 +85,23 @@ export class AiSearchService {
 
   /**
    * Synchronous browsing (wait for results)
+   * Automatically uses instant endpoint when limit <= 10 and return_content is false
    */
   async search(options: SearchOptions, timeout = 120000, pollInterval = 5000): Promise<AiSearchRun> {
+    // Use instant endpoint if conditions are met for optimal performance
+    const useInstant = (options.limit === undefined || options.limit <= 10) && 
+                       (options.return_content === false || options.return_content === undefined);
+    
+    if (useInstant) {
+      const instantResult = await this.search_instant(options);
+      return {
+        run_id: instantResult.run_id,
+        message: null,
+        data: instantResult.data || []
+      };
+    }
+
+    // Otherwise use the polling-based approach
     const submitResult = await this.submitSearchRequest(options);
     const runId = submitResult.run_id
     if (!runId) {
