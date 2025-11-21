@@ -2,7 +2,6 @@ import { OxylabsAIStudioClient } from '../client.js';
 import { 
   MapOptions, 
   RunResponse,
-  RunStatusResponse,
 } from '../types.js';
 
 /**
@@ -32,21 +31,6 @@ export class AiMapService {
   }
 
 
-  /**
-   * Get map run status (GET /map/run)
-   */
-  async getMapRunStatus(runId: string): Promise<RunStatusResponse> {
-    if (!runId) {
-      throw new Error('run_id is required');
-    }
-
-    const params = new URLSearchParams();
-    params.append('run_id', runId);
-
-    const url = `/map/run?${params.toString()}`;
-
-    return await this.client.get(url);
-  }
   /**
    * Get map run data/results (GET /map/run/data)
    */
@@ -78,13 +62,13 @@ export class AiMapService {
     const startTime = Date.now();
 
     while (Date.now() - startTime < timeout) {
-      const runStatus = await this.getMapRunStatus(runId);
-      const status = runStatus.status;
+      const response = await this.getMapRunData(runId);
+      const status = response.status;
       console.log('Run status:', status);
       if (status === 'completed' || status === 'success') {
-        return await this.getMapRunData(runId);
+        return response.data
       } else if (status === 'failed' || status === 'error') {
-        throw new Error(`Mapping failed: ${runStatus.error || runStatus.message || 'Unknown error'}`);
+        throw new Error(`Mapping failed: ${response.error_code || response.message || 'Unknown error'}`);
       }
 
       await new Promise(resolve => setTimeout(resolve, pollInterval));

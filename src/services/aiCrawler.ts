@@ -82,7 +82,7 @@ export class AiCrawlerService {
       if (status === 'completed') {
         return runData;
       } else if (status === 'failed' || status === 'error') {
-        const message = ((runData.error || runData.message)) || 'Unknown error';
+        const message = ((runData.error_code || runData.message)) || 'Unknown error';
         throw new Error(`Crawling failed: ${message}`);
       }
 

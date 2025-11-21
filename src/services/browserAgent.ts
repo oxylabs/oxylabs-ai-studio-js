@@ -44,21 +44,6 @@ export class BrowserAgentService {
     return await this.client.post<RunResponse>('/browser-agent/run', payload);
   }
 
-  /**
-   * Get browsing run status (GET /browse/run)
-   */
-  async getBrowseRunSteps(runId: string): Promise<any> {
-    if (!runId) {
-      throw new Error('run_id is required');
-    }
-
-    const params = new URLSearchParams();
-    params.append('run_id', runId);
-
-    const url = `/browser-agent/run/steps?${params.toString()}`;
-
-    return await this.client.get(url);
-  }
 
   /**
    * Get browsing run data/results (GET /browse/run/data)
@@ -90,13 +75,13 @@ export class BrowserAgentService {
     const startTime = Date.now();
 
     while (Date.now() - startTime < timeout) {
-      const runStatus = await this.getBrowseRunSteps(runId);
-      const run_status = runStatus.run.status;
+      const response = await this.getBrowseRunData(runId);
+      const run_status = response.status;
       console.log('Run status:', run_status);
       if (run_status === 'completed' || run_status === 'success') {
-        return await this.getBrowseRunData(runId);
+        return response.data
       } else if (run_status === 'failed' || run_status === 'error') {
-        throw new Error(`Browsing failed: ${runStatus.run.error || runStatus.run.message || 'Unknown error'}`);
+        throw new Error(`Browsing failed: ${response.error_code || response.message || 'Unknown error'}`);
       }
 
       await new Promise(resolve => setTimeout(resolve, pollInterval));
