@@ -4,7 +4,6 @@ import {
   ScrapeOptions, 
   ScrapeWithAutoSchemaOptions,
   RunResponse,
-  RunStatusResponse,
   SchemaResponse 
 } from '../types.js';
 
@@ -33,9 +32,13 @@ export class AiScraperService {
     const payload: any = {
       url: options.url,
       output_format: options.output_format || "markdown",
-      render_html: options.render_javascript || false,
-      geo_location: options.geo_location || undefined
+      render_javascript: options.render_javascript || false,
+      geo_location: options.geo_location || undefined,
     };
+
+    if (options.user_agent) {
+      payload.user_agent = options.user_agent;
+    }
 
     // Only include openapi_schema if output_format is json or csv
     if ((options.output_format === "json" || options.output_format === "csv" || options.output_format === "toon") && options.schema) {
@@ -43,22 +46,6 @@ export class AiScraperService {
     }
 
     return await this.client.post<RunResponse>('/scrape', payload);
-  }
-
-  /**
-   * Get scraping run status (GET /scrape/run)
-   */
-  async getScrapeRun(runId: string): Promise<RunStatusResponse> {
-    if (!runId) {
-      throw new Error('run_id is required');
-    }
-    
-    const params = new URLSearchParams();
-    params.append('run_id', runId);
-    
-    const url = `/scrape/run?${params.toString()}`;
-    
-    return await this.client.get<RunStatusResponse>(url);
   }
 
   /**
@@ -91,13 +78,13 @@ export class AiScraperService {
     const startTime = Date.now();
     
     while (Date.now() - startTime < timeout) {
-      const runStatus = await this.getScrapeRun(runId);
-      const run_status = runStatus.status;
-      console.log('Run status:', run_status);
-      if (run_status === 'completed' || run_status === 'success') {
-        return await this.getScrapeRunData(runId);
-      } else if (run_status === 'failed' || run_status === 'error') {
-        throw new Error(`Scraping failed: ${runStatus.error || runStatus.message || 'Unknown error'}`);
+      const runData = await this.getScrapeRunData(runId);
+      const status = runData?.status as string | undefined;
+      console.log('Run status:', status);
+      if (status === 'completed') {
+        return runData;
+      } else if (status === 'failed') {
+        throw new Error(`Scraping failed: ${runData?.error_code || runData?.message || 'Unknown error'}`);
       }
 
       await new Promise(resolve => setTimeout(resolve, pollInterval));

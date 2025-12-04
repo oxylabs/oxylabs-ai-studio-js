@@ -63,6 +63,7 @@ export interface ScrapeOptions {
   schema?: Record<string, any>;
   render_javascript?: boolean | "auto";
   geo_location?: string;
+  user_agent?: string;
 }
 
 export interface ScrapeWithAutoSchemaOptions {
@@ -71,6 +72,7 @@ export interface ScrapeWithAutoSchemaOptions {
   output_format?: OutputFormat | string;
   render_javascript?: boolean | "auto";
   geo_location?: string;
+  user_agent?: string;
 }
 
 // AI Crawl interfaces
@@ -82,6 +84,7 @@ export interface CrawlOptions {
   render_javascript?: boolean;
   return_sources_limit?: number;
   geo_location?: string;
+  max_credits?: number | null;
 }
 
 export interface CrawlWithAutoSchemaOptions {
@@ -93,6 +96,7 @@ export interface CrawlWithAutoSchemaOptions {
   render_javascript?: boolean;
   return_sources_limit?: number;
   geo_location?: string;
+  max_credits?: number | null;
 }
 
 // AI Browse interfaces
@@ -156,8 +160,14 @@ export interface SearchInstantResponse {
 
 export interface MapOptions {
   url: string;
-  user_prompt: string;
-  return_sources_limit?: number;
-  geo_location?: string;
+  search_keywords?: string[];
+  user_prompt?: string | null;
+  limit?: number;
+  geo_location?: string | null;
   render_javascript?: boolean;
+  max_crawl_depth?: number;
+  include_sitemap?: boolean;
+  allow_subdomains?: boolean;
+  allow_external_domains?: boolean;
+  max_credits?: number | null;
 }

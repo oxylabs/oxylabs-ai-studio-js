@@ -30,7 +30,7 @@ export class AiSearchService {
       payload.limit = options.limit;
     }
     if (options.render_javascript !== undefined) {
-      payload.render_html = options.render_javascript;
+      payload.render_javascript = options.render_javascript;
     }
     if (options.return_content !== undefined) {
       payload.return_content = options.return_content;
@@ -46,7 +46,8 @@ export class AiSearchService {
    * Submit instant search request (POST /search/instant)
    * Returns data in realtime on the same connection without polling
    */
-  async search_instant(options: SearchOptions): Promise<SearchInstantResponse> {
+  async searchInstant(options: SearchOptions): Promise<SearchInstantResponse> {
+    // Backwards-compatible method name for the /search/instant endpoint
     const payload: Record<string, any> = {
       query: options.query,
     };
@@ -56,12 +57,6 @@ export class AiSearchService {
     }
     if (options.limit !== undefined) {
       payload.limit = options.limit;
-    }
-    if (options.render_javascript !== undefined) {
-      payload.render_html = options.render_javascript;
-    }
-    if (options.return_content !== undefined) {
-      payload.return_content = options.return_content;
     }
 
     return await this.client.post<SearchInstantResponse>('/search/instant', payload);
@@ -93,7 +88,7 @@ export class AiSearchService {
                        (options.return_content === false || options.return_content === undefined);
     
     if (useInstant) {
-      const instantResult = await this.search_instant(options);
+      const instantResult = await this.searchInstant(options);
       return {
         run_id: instantResult.run_id,
         message: null,

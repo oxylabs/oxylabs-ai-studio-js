@@ -9,10 +9,11 @@ import {
       console.log('Testing ai-map...');
       
       const options = {
-        url: 'https://career.oxylabs.io',
-        user_prompt: 'job ad pages',
+        url: 'https://oxylabs.io',
+        search_keywords: ['blog'],
         render_javascript: false,
-        return_sources_limit: 10,
+        max_crawl_depth: 1,
+        limit: 10,
         geo_location: 'US',
     };
       
