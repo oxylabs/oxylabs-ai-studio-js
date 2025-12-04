@@ -60,7 +60,7 @@ async function testBrowseOutputMarkdown() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.MARKDOWN,
       user_prompt: 'Navigate to the first job ad you can find.',
-      geo_location: 'DE',
+      geo_location: 'Germany',
     };
     
     const results = await sdk.browserAgent.browse(options, timeout);

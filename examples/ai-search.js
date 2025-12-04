@@ -52,7 +52,7 @@ async function testInstantSearch() {
       geo_location: 'United States',
     };
     
-    const results = await sdk.aiSearch.search_instant(options);
+    const results = await sdk.aiSearch.searchInstant(options);
     console.log('Instant search results:', JSON.stringify(results, null, 2));
   } catch (error) {
     console.error('Instant search error:', error.message);

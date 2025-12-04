@@ -21,10 +21,16 @@ export class AiMapService {
   async submitMapRequest(options: MapOptions): Promise<RunResponse> {
     const payload: any = {
       url: options.url,
-      user_prompt: options.user_prompt,
-      return_sources_limit: options.return_sources_limit || undefined,
-      geo_location: options.geo_location || undefined,
-      render_html: options.render_javascript || undefined,
+      search_keywords: options.search_keywords ?? undefined,
+      user_prompt: options.user_prompt ?? undefined,
+      limit: options.limit ?? undefined,
+      geo_location: options.geo_location ?? undefined,
+      render_javascript: options.render_javascript ?? undefined,
+      max_crawl_depth: options.max_crawl_depth ?? undefined,
+      include_sitemap: options.include_sitemap ?? undefined,
+      allow_subdomains: options.allow_subdomains ?? undefined,
+      allow_external_domains: options.allow_external_domains ?? undefined,
+      max_credits: options.max_credits ?? undefined,
     };
 
     return await this.client.post<RunResponse>('/map', payload);

@@ -32,7 +32,7 @@ export class BrowserAgentService {
     const payload: any = {
       url: options.url,
       output_format: options.output_format || "markdown",
-      auxiliary_prompt: options.user_prompt,
+      user_prompt: options.user_prompt,
       geo_location: options.geo_location || undefined
     };
 
