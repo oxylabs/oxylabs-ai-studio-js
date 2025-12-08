@@ -24,7 +24,7 @@ export OXYLABS_AI_STUDIO_API_KEY=your_api_key_here
 
 ## AI-Scraper
 
-### Generate Schema
+### Generate Schema 
 
 ```javascript
 import { 
@@ -72,7 +72,6 @@ async function testScrapeOutputJson() {
     
     const options = {
       url: 'https://www.freelancer.com',
-      user_prompt: 'Extract all links',
       output_format: OutputFormat.JSON,
       geo_location: "US",
       schema: {
@@ -95,11 +94,11 @@ testScrapeOutputJson();
 
 ### Available Parameters
 - `url` (*string*): The target URL to process.
-- `user_prompt` (*string*): Instructions for what data to extract. This is used to automatically generate the `openapi_schema` when using the `scrapeWithAutoSchema` method.
 - `output_format` (*string*): The desired format for the output. Can be either `markdown`, `json`, `screenshot`, `csv` or `toon`. Defaults to `markdown`.
-- `render_html` (*boolean | string*): Specifies whether to render JavaScript on the page before extraction. Can be set up to `auto`, meaning that we will decide if it's necessary. Defaults to `false`.
-- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`, `csv` or `toon`.
-- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
+- `render_javascript` (*boolean | "auto"*): Whether to render JavaScript before extraction. Can be `"auto"` to auto-detect if rendering is needed. Defaults to `false`.
+- `schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is `json`, `csv` or `toon`.
+- `geo_location` (*string*): Specifies the geographic location (ISO2 format) or country canonical name from which the request should be simulated.
+- `user_agent` (*string*): User-Agent request header. See [available values](https://developers.oxylabs.io/scraping-solutions/web-scraper-api/features/http-context-and-job-management/user-agent-type).
 
 ## AI-Crawler
 
@@ -126,7 +125,7 @@ async function testCrawlOutputJson() {
       output_format: OutputFormat.JSON,
       user_prompt: 'Get job ad pages',
       return_sources_limit: 3,
-      geo_location: "DE",
+      geo_location: "Germany",
       schema: {
         type: "object",
         properties: {
@@ -157,13 +156,14 @@ testCrawlOutputJson();
 
 ### Available Parameters
 - `url` (*string*): The starting URL for the crawl.
-- `crawl_prompt` (*string*): Instructions defining the types of pages to find and crawl.
-- `parse_prompt` (*string*): Instructions for what data to extract from the crawled pages. This is used to automatically generate the `openapi_schema` when using the `crawlWithAutoSchema` method.
+- `user_prompt` (*string*): Crawling instructions.
+  - For auto-schema flow, use `parse_prompt` in `crawlWithAutoSchema()` to generate the `schema`.
 - `output_format` (*string*): The desired format for the output. Can be either `markdown`, `json`, `csv` or `toon`. Defaults to `markdown`.
-- `max_pages` (*integer*): The maximum number of pages or sources to return. Defaults to `25`.
-- `render_html` (*boolean*): Specifies whether to render JavaScript on the pages before extraction. Defaults to `false`.
-- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`, `csv` or `toon`.
-- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
+- `return_sources_limit` (*integer*): The maximum number of pages/sources to return. Defaults to `25`.
+- `render_javascript` (*boolean*): Whether to render JavaScript on pages before extraction. Defaults to `false`.
+- `schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. Required when `output_format` is `json`, `csv` or `toon`.
+- `geo_location` (*string*): Specifies the geographic location (ISO2 format) or country canonical name from which the request should be simulated.
+- `max_credits` (*integer | null*): Optional cap on credits to spend for the run.
 
 ## Browser-Agent
 
@@ -210,12 +210,11 @@ testBrowseOutputJson();
 
 ### Available Parameters
 - `url` (*string*): The target URL for the browser agent to start at.
-- `browse_prompt` (*string*): Instructions defining the actions the browser agent should perform.
-- `parse_prompt` (*string*): Instructions for what data to extract after performing the browser actions. This is used to automatically generate the `openapi_schema` when using the `browseWithAutoSchema` method.
+- `user_prompt` (*string*): Instructions describing what actions to perform and data to extract.
+  - For auto-schema flow, use `parse_prompt` in `browseWithAutoSchema()` to generate the `schema`.
 - `output_format` (*string*): The desired format for the output. Can be `markdown`, `html`, `json`, `csv`, `toon`, or `screenshot`. Defaults to `markdown`.
-- `render_html` (*boolean*): Specifies whether to render JavaScript on the page. Although this is a browser agent, this flag might influence certain behaviors. Defaults to `false`.
-- `openapi_schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is set to `json`, `csv` or `toon`.
-- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
+- `schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is `json`, `csv` or `toon`.
+- `geo_location` (*string*): Specifies the geographic location (ISO2 format) or country canonical name from which the request should be simulated.
 
 ## AI-Search
 
@@ -257,9 +256,7 @@ testSearch();
 ### Available Parameters
 - `query` (*string*): The search query.
 - `limit` (*integer*): The maximum number of search results to return. Maximum: 50.
-- `render_javascript` (*boolean*): Whether to render JavaScript on the page. Defaults to `false`.
-- `return_content` (*boolean*): Whether to return the markdown content of each of the search result. Defaults to `true`.
-- `geo_location` (*string*): Specifies the geographic location (ISO2 format) from which the request should be simulated.
+- `geo_location` (*string*): ISO 2-letter format, country name, coordinate formats are supported. See more at [SERP Localization](https://developers.oxylabs.io/scraping-solutions/web-scraper-api/features/localization/serp-localization).
 
 ### Performance Optimization
 
@@ -275,14 +272,17 @@ This provides real-time results without polling for faster response times.
 - `limit` > 10
 - OR `return_content` is `true`
 
-You can also directly use `search_instant()` method if you want to explicitly use the instant endpoint:
+You can also directly use `searchInstant()` method if you want to explicitly use the instant endpoint:
 
 ```javascript
-const results = await sdk.aiSearch.search_instant({
+const results = await sdk.aiSearch.searchInstant({
   query: 'weather today',
   geo_location: 'United States'
 });
 ```
+- `query` (*string*): The search query.
+- `limit` (*integer*): The maximum number of search results to return. Maximum: 10.
+- `geo_location` (*string*): Google's canonical name of the location. See more at [Google Ads GeoTargets](https://developers.google.com/google-ads/api/data/geotargets).
 
 ## AI-Map
 
@@ -322,11 +322,17 @@ testMap();
 ```
 
 ### Available Parameters
-- `url` (*string*): The target URL to map and extract data from.
-- `user_prompt` (*string*): Instructions for what data to extract from the mapped pages.
-- `return_sources_limit` (*integer*): The maximum number of sources/pages to return from the mapping process.
-- `geo_location` (*string*): The geographical location to use for the mapping request (e.g., 'US', 'UK').
-- `render_javascript` (*boolean*): Specifies whether to render JavaScript on the pages before mapping. Defaults to `false`.
+- `url` (*string*): The target URL to map and discover URLs from.
+- `search_keywords` (*string[]*): Optional keywords to bias the mapping.
+- `user_prompt` (*string | null*): Optional instructions to focus the mapping on relevant areas.
+- `limit` (*integer*): The maximum number of URLs to return (default `50`, max `10000`).
+- `max_crawl_depth` (*integer*): Maximum depth to crawl within the site (default `1`, max `5`).
+- `include_sitemap` (*boolean*): Whether to include sitemap URLs (default `true`).
+- `allow_subdomains` (*boolean*): Whether to include subdomains (default `false`).
+- `allow_external_domains` (*boolean*): Whether to include external domains (default `false`).
+- `geo_location` (*string | null*): The location to use (ISO2 or country canonical name).
+- `render_javascript` (*boolean*): Whether to render JavaScript when mapping (default `false`).
+- `max_credits` (*integer | null*): Optional cap on credits to spend for the run.
 
 ## Running Examples
 

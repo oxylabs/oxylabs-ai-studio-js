@@ -19,36 +19,39 @@ export class AiCrawlerService {
   }
 
   /**
-   * Generate schema for crawling (POST /crawl/schema)
+   * Generate schema for crawling (POST /crawl/generate-params)
    */
   async generateSchema(options: GenerateSchemaOptions): Promise<SchemaResponse> {
-    return await this.client.post<SchemaResponse>('/extract/generate-params', options);
+    return await this.client.post<SchemaResponse>('/crawl/generate-params', options);
   }
 
   /**
-   * Submit crawling request (POST /extract/run)
+   * Submit crawling request (POST /crawl/run)
    */
   async submitCrawlRequest(options: CrawlOptions): Promise<RunResponse> {
     const payload: any = {
-      domain: options.url, // Note: API expects 'domain' but we use 'url' for consistency
-      output_format: options.output_format || "markdown",
+      url: options.url,
       user_prompt: options.user_prompt,
-      auxiliary_prompt: options.user_prompt,
-      render_html: options.render_javascript || false,
-      return_sources_limit: options.return_sources_limit || 25,
-      geo_location: options.geo_location || undefined
+      output_format: options.output_format || "markdown",
+      render_javascript: options.render_javascript || false,
+      return_sources_limit: options.return_sources_limit ?? 25,
+      geo_location: options.geo_location || undefined,
     };
 
-    // Only include openapi_schema if output_format is json
+    if (options.max_credits !== undefined) {
+      payload.max_credits = options.max_credits;
+    }
+
+    // Only include openapi_schema if output_format is json, csv or toon
     if ((options.output_format === "json" || options.output_format === "csv" || options.output_format === "toon") && options.schema) {
       payload.openapi_schema = options.schema;
     }
 
-    return await this.client.post<RunResponse>('/extract/run', payload);
+    return await this.client.post<RunResponse>('/crawl/run', payload);
   }
 
   /**
-   * Get crawling run data/results (GET /extract/run/data)
+   * Get crawling run data/results (GET /crawl/run/data)
    */
   async getCrawlRunData(runId: string): Promise<any> {
     if (!runId) {
@@ -58,7 +61,7 @@ export class AiCrawlerService {
     const params = new URLSearchParams();
     params.append('run_id', runId);
 
-    const url = `/extract/run/data?${params.toString()}`;
+    const url = `/crawl/run/data?${params.toString()}`;
 
     return await this.client.get(url);
   }
@@ -111,7 +114,8 @@ export class AiCrawlerService {
       schema: schemaResult.openapi_schema,
       render_javascript: options.render_javascript || false,
       return_sources_limit: options.return_sources_limit || 25,
-      geo_location: options.geo_location || undefined
+      geo_location: options.geo_location || undefined,
+      max_credits: options.max_credits ?? undefined,
     }, timeout);
   }
 }
