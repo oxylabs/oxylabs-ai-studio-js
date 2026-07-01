@@ -99,6 +99,7 @@ testScrapeOutputJson();
 - `schema` (*Record<string, any>*): A JSON Schema object that defines the structure of the output data. This is required when `output_format` is `json`, `csv` or `toon`.
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) or country canonical name from which the request should be simulated.
 - `user_agent` (*string*): User-Agent request header. See [available values](https://developers.oxylabs.io/scraping-solutions/web-scraper-api/features/http-context-and-job-management/user-agent-type).
+- `optimize_content` (*boolean*): Return cleaner markdown by focusing on the main page content. Output will be smaller in size when set to `true`. Defaults to `true`.
 
 ## AI-Crawler
 

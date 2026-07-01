@@ -64,6 +64,7 @@ export interface ScrapeOptions {
   render_javascript?: boolean | "auto";
   geo_location?: string;
   user_agent?: string;
+  optimize_content?: boolean;
 }
 
 export interface ScrapeWithAutoSchemaOptions {
@@ -73,6 +74,7 @@ export interface ScrapeWithAutoSchemaOptions {
   render_javascript?: boolean | "auto";
   geo_location?: string;
   user_agent?: string;
+  optimize_content?: boolean;
 }
 
 // AI Crawl interfaces
