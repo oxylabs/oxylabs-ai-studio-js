@@ -88,6 +88,7 @@ async function testScrapeOutputMarkdown() {
       url: 'https://www.freelancer.com',
       output_format: OutputFormat.MARKDOWN,
       geo_location: 'DE',
+      optimize_content: true,
     };
     
     const results = await sdk.aiScraper.scrape(options, timeout);
@@ -103,6 +104,6 @@ console.log('\n=== Testing AI Scrape Examples ===');
 // Run examples
 // await testGenerateSchema();
 // await testScrapeOutputJson();
-await testScrapeOutputCsv();
-// await testScrapeOutputMarkdown(); 
+// await testScrapeOutputCsv();
+await testScrapeOutputMarkdown(); 
 // await testScrapeAutoSchema(); 

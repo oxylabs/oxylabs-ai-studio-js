@@ -33,6 +33,7 @@ export class AiScraperService {
       url: options.url,
       output_format: options.output_format || "markdown",
       render_javascript: options.render_javascript || false,
+      optimize_content: options.optimize_content ?? true,
       geo_location: options.geo_location || undefined,
     };
 
@@ -108,7 +109,9 @@ export class AiScraperService {
       output_format: options.output_format || "markdown",
       schema: schemaResult.openapi_schema,
       render_javascript: options.render_javascript || false,
-      geo_location: options.geo_location || undefined
+      geo_location: options.geo_location || undefined,
+      user_agent: options.user_agent,
+      optimize_content: options.optimize_content,
     }, timeout);
   }
 } 
