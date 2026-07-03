@@ -35,6 +35,7 @@ export class AiScraperService {
       render_javascript: options.render_javascript || false,
       optimize_content: options.optimize_content ?? true,
       geo_location: options.geo_location || undefined,
+      browser_instructions: options.browser_instructions || undefined,
     };
 
     if (options.user_agent) {

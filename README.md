@@ -100,6 +100,7 @@ testScrapeOutputJson();
 - `geo_location` (*string*): Specifies the geographic location (ISO2 format) or country canonical name from which the request should be simulated.
 - `user_agent` (*string*): User-Agent request header. See [available values](https://developers.oxylabs.io/scraping-solutions/web-scraper-api/features/http-context-and-job-management/user-agent-type).
 - `optimize_content` (*boolean*): Return cleaner markdown by focusing on the main page content. Output will be smaller in size when set to `true`. Defaults to `true`.
+- `browser_instructions` (*BrowserInstruction[]*): Browser actions to run before capture (click, input, wait, etc.). Requires `render_javascript: true`. Format follows [Web Scraper API browser instructions](https://developers.oxylabs.io/products/web-scraper-api/features/js-rendering-and-browser-control#browser-instructions).
 
 ## AI-Crawler
 
