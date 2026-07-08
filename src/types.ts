@@ -52,6 +52,23 @@ export interface SchemaResponse {
   openapi_schema: Record<string, any>;
 }
 
+export interface BrowserInstructionSelector {
+  type: 'xpath' | 'css' | 'text';
+  value: string;
+}
+
+export interface BrowserInstruction {
+  type: 'click' | 'input' | 'scroll' | 'scroll_to_bottom' | 'wait' | 'wait_for_element' | 'fetch_resource';
+  selector?: BrowserInstructionSelector;
+  value?: string;
+  filter?: string;
+  x?: number;
+  y?: number;
+  timeout_s?: number;
+  wait_time_s?: number;
+  on_error?: 'error' | 'skip';
+}
+
 // AI Scrape interfaces
 export interface GenerateSchemaOptions {
   user_prompt: string;
@@ -65,6 +82,7 @@ export interface ScrapeOptions {
   geo_location?: string;
   user_agent?: string;
   optimize_content?: boolean;
+  browser_instructions?: BrowserInstruction[];
 }
 
 export interface ScrapeWithAutoSchemaOptions {
